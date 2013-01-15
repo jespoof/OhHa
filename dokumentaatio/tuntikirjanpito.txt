@@ -1,0 +1,5 @@
+TUNTIKIRJANPITO:
+
+päivä		aika	kohde
+14.1		40 min	Github-räpeltäminen
+15.1		1 h	Github-räpeltäminen jatkuu, aihemäärittely
