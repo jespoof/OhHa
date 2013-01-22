@@ -31,7 +31,7 @@ public class AineksetTest {
     
     
     @Test
-    public void lisaaAineksetOikein() {
+    public void lisaaAineksetToimii() {
       
         aines1 = new Ainesosa("jauho", "5 dl");
         aines2 = new Ainesosa("sokeri", "2 dl");

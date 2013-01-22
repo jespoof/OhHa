@@ -30,15 +30,7 @@ public class RuokalajiTest {
     
     public RuokalajiTest() {
         
-        ruokalaji = new Ruokalaji("Huonoa ruokaa");
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
+        ruokalaji = new Ruokalaji("Pahaa ruokaa");
     }
     
     @Before
@@ -63,12 +55,6 @@ public class RuokalajiTest {
         
     }
     
-    @After
-    public void tearDown() {
-    }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
     @Test
     public void lisaaReseptiToimii() {
         
@@ -112,6 +98,5 @@ public class RuokalajiTest {
         
         assertEquals("Ei reseptiä", vaaraHaku);
     
-   }
-    
+    }
 }

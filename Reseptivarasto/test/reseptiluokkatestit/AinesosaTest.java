@@ -21,7 +21,7 @@ public class AinesosaTest {
     
     
     @Test
-      public void nimiMaaraJaYksikkoOikein() {
+      public void nimiJaMaaraOikein() {
       Ainesosa osa = new Ainesosa("jauho", "5 dl");
       
       String tulostus = osa.toString(); 

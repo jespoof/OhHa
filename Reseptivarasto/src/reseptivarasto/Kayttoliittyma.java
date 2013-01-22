@@ -119,7 +119,7 @@ public class Kayttoliittyma {
                     
                     if (haetaanko.equals("K")) {
                         
-                        hakuRuokalajista();
+                        mikaHakutuloksista();
                         
                     }
                     
@@ -140,6 +140,11 @@ public class Kayttoliittyma {
                     System.out.println("");
                     System.out.println(kirjasto.haeNimella(nimihaku));
                     
+                    System.out.println("");
+                    System.out.println("");
+                    
+                    mikaHakutuloksista();
+                    
                 }
                 
                 if (kasky.equals("6")) {
@@ -154,15 +159,18 @@ public class Kayttoliittyma {
                     System.out.println("");
                     System.out.println(kirjasto.haeAinesosalla(aineshaku));
                     
+                    System.out.println("");
+                    System.out.println("");
+                    
+                    mikaHakutuloksista();
+                    
                 }
                 
                 if (kasky.equals("7")) {
                 
                     break;
                 }
-                
             }
-                
     }
 
     
@@ -182,9 +190,9 @@ public class Kayttoliittyma {
         ainekset.lisaaAines(new Ainesosa(ainesNimi, ainesMaara));
         
         System.out.println("");
-                        
-        
+    
     }
+    
     
     public void reseptinHaku(int num) {
         
@@ -214,10 +222,9 @@ public class Kayttoliittyma {
             if (valinta.equals("E")) {
                 break;
             }
-                        
         }
-        
     }
+    
     
     public void hakuRuokalajista() {
         
@@ -231,6 +238,19 @@ public class Kayttoliittyma {
         System.out.println("");
                     
         reseptinHaku(num);
+    }
+    
+    
+    public void mikaHakutuloksista() {
+        
+        System.out.println("Minkä reseptin ohjeen haluat?");
+        int haku = Integer.parseInt(lukija.nextLine());
+        System.out.println("");
+        System.out.println("---");
+        System.out.println(kirjasto.haeTuloksista(haku));
+        System.out.println("---");
+        System.out.println("");
+        
     }
 }
 

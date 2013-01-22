@@ -29,7 +29,6 @@ public class Resepti {
     public String getAinekset() {
         
         return ainekset.toString();
-        
     }
     
     public String getOhjeet() {
@@ -37,10 +36,9 @@ public class Resepti {
         return ohjeet;
     }
     
-
-    public boolean onkoAines(String haku) {
+    public boolean onkoAinesta(String haku) {
         
-        if (ainekset.onkoAines(haku) == true) {
+        if (ainekset.onkoAinesta(haku) == true) {
             return true;
         }
         

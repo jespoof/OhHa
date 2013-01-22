@@ -26,18 +26,16 @@ public class Ainekset {
         
         this.aines.add(ainesosa);
         this.lista.add(ainesosa.toString());
-        
     }
     
     
-    public boolean onkoAines (String haku) {
+    public boolean onkoAinesta (String haku) {
         
         for (Ainesosa ainesosa : aines) {
             
             if (ainesosa.getNimi().equals(haku)){
                 return true;
             }
-            
         }
         
         return false;
