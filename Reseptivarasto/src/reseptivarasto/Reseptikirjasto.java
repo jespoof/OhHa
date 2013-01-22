@@ -102,4 +102,31 @@ public class Reseptikirjasto {
         
     }
     
+<<<<<<< HEAD
+=======
+    public String haeAinesosalla(String haku) {
+        
+        String reseptitJoissaAines = "";
+        
+        for (Ruokalaji ruokalaji : ruokalajit) {
+            
+            reseptitJoissaAines += ruokalaji.ainesHaku(haku);
+        }
+        
+        return reseptitJoissaAines;
+    }
+    
+    public String haeNimella(String haku) {
+        
+        String reseptitJoidenNimi = "";
+        
+        for (Ruokalaji ruokalaji : ruokalajit) {
+            
+            reseptitJoidenNimi += ruokalaji.nimiHaku(haku);
+        }
+        
+        return reseptitJoidenNimi;
+    }
+    
+>>>>>>> 31f038224b703b6a0a26d682795040762179658b
 }

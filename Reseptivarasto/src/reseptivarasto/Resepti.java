@@ -37,6 +37,27 @@ public class Resepti {
         return ohjeet;
     }
     
+<<<<<<< HEAD
+=======
+    public boolean onkoAines(String haku) {
+        
+        if (ainekset.onkoAines(haku) == true) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean onkoNimi(String haku) {
+        
+        if (this.nimi.equals(haku)) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+>>>>>>> 31f038224b703b6a0a26d682795040762179658b
     @Override
     public String toString() {
         

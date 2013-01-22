@@ -63,4 +63,38 @@ public class Ruokalaji {
         }
     }
     
+<<<<<<< HEAD
+=======
+    public String ainesHaku(String haku) {
+        
+        String ainesOn = this.nimi + "\n";
+        int i = 1;
+        
+        for (Resepti resepti : reseptit) {
+            
+            if (resepti.onkoAines(haku) == true) {
+                
+                ainesOn += i + " " + resepti.getNimi() + "\n";
+                i++;
+            }
+        }
+        
+        return ainesOn + "\n";
+    }
+    
+    public String nimiHaku(String haku) {
+        
+        String nimiOn = this.nimi + "\n";
+        
+        for (Resepti resepti : reseptit) {
+            
+            if (resepti.onkoNimi(haku) == true) {
+                
+                nimiOn += resepti.getNimi() + "\n";
+            }
+        }
+        
+        return nimiOn + "\n";
+    }
+>>>>>>> 31f038224b703b6a0a26d682795040762179658b
 }
