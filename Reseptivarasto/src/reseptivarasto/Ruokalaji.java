@@ -63,8 +63,7 @@ public class Ruokalaji {
         }
     }
     
-<<<<<<< HEAD
-=======
+
     public String ainesHaku(String haku) {
         
         String ainesOn = this.nimi + "\n";
@@ -96,5 +95,5 @@ public class Ruokalaji {
         
         return nimiOn + "\n";
     }
->>>>>>> 31f038224b703b6a0a26d682795040762179658b
+
 }

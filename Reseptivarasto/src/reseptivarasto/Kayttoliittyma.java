@@ -130,10 +130,7 @@ public class Kayttoliittyma {
                 }
                 
                 if (kasky.equals("5")) {
-                
-<<<<<<< HEAD
-                    //Toteutetaan myöhemmin
-=======
+           
                     System.out.println("HAKU RESEPTIN NIMEN MUKAAN");
                     System.out.println("");
                 
@@ -143,14 +140,11 @@ public class Kayttoliittyma {
                     System.out.println("");
                     System.out.println(kirjasto.haeNimella(nimihaku));
                     
->>>>>>> 31f038224b703b6a0a26d682795040762179658b
                 }
                 
                 if (kasky.equals("6")) {
                 
-<<<<<<< HEAD
-                    //Toteutetaan myöhemmin
-=======
+
                     System.out.println("HAKU AINESOSAN MUKAAN");
                     System.out.println("");
                 
@@ -160,7 +154,6 @@ public class Kayttoliittyma {
                     System.out.println("");
                     System.out.println(kirjasto.haeAinesosalla(aineshaku));
                     
->>>>>>> 31f038224b703b6a0a26d682795040762179658b
                 }
                 
                 if (kasky.equals("7")) {

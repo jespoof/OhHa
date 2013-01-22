@@ -102,8 +102,7 @@ public class Reseptikirjasto {
         
     }
     
-<<<<<<< HEAD
-=======
+
     public String haeAinesosalla(String haku) {
         
         String reseptitJoissaAines = "";
@@ -128,5 +127,5 @@ public class Reseptikirjasto {
         return reseptitJoidenNimi;
     }
     
->>>>>>> 31f038224b703b6a0a26d682795040762179658b
+
 }

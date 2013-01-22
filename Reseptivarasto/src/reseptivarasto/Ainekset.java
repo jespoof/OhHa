@@ -29,8 +29,7 @@ public class Ainekset {
         
     }
     
-<<<<<<< HEAD
-=======
+    
     public boolean onkoAines (String haku) {
         
         for (Ainesosa ainesosa : aines) {
@@ -44,7 +43,6 @@ public class Ainekset {
         return false;
     }
     
->>>>>>> 31f038224b703b6a0a26d682795040762179658b
     
     @Override
     public String toString() {
