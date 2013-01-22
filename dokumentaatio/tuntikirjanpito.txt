@@ -1,12 +1,10 @@
 TUNTIKIRJANPITO:
 
-päivä     aika     kohde
-14.1      40 min    Github-räpeltäminen
-15.1      1 h       Github-räpeltäminen jatkuu, aihemäärittely
-16.1	        3 h     Koodaaminen alkaa, luokkien luomista yms.
-17.1	        4 h     Lisää koodaamista, metodeja, tekstikäyttöliittymä…
-18.1	        3 h     Koodin parantelua, testien luomista, luokkakaavio
-16.1	      	3 h     Koodaaminen alkaa, luokkien luomista yms.
-17.1	      	4 h     Lisää koodaamista, metodeja, tekstikäyttöliittymä…
-18.1	      	3 h     Koodin parantelua, testien luomista, luokkakaavio
-21.1        2 h     Hakuominaisuus
+päivä	aika	kohde
+14.1	40 min	Github-räpeltäminen
+15.1	1h	Github-räpeltäminen jatkuu, aihemäärittely
+16.1	3 h     Koodaaminen alkaa, luokkien luomista yms.
+17.1	4 h     Lisää koodaamista, metodeja, tekstikäyttöliittymä…
+18.1	3 h     Koodin parantelua, testien luomista, luokkakaavio
+21.1	4 h     Hakuominaisuuksia
+22.1	4 h	Hakujen parantelua, poikkeustilanteita
