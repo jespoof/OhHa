@@ -14,9 +14,11 @@ public class Reseptikirjasto {
     
     private ArrayList<Ruokalaji> ruokalajit;
     private ArrayList<Resepti> reseptihaku;
+    private int ruokalajienMaara;
     
     public Reseptikirjasto() {
         ruokalajit = new ArrayList<Ruokalaji>();
+        ruokalajienMaara = 0;
     }
     
     public boolean lisaaResepti(int numero, Resepti resepti) {
@@ -33,6 +35,11 @@ public class Reseptikirjasto {
     
     public void lisaaRuokalaji(Ruokalaji ruokalaji) {
         ruokalajit.add(ruokalaji);
+        ruokalajienMaara++;
+    }
+    
+    public int getRuokalajienMaara() {
+        return ruokalajienMaara;
     }
     
     public String listaaRuokalajinReseptit (int numero) {
@@ -51,7 +58,6 @@ public class Reseptikirjasto {
         int i = 1;
         
         for (Ruokalaji ruokalaji : ruokalajit) {
-            
             kaikki += ruokalaji.getNimi() + "\n";
             
             for (Resepti resepti : ruokalaji.getReseptit()) {
@@ -60,6 +66,9 @@ public class Reseptikirjasto {
                 i++;
             }
             kaikki += "\n";
+        }
+        if (reseptihaku.isEmpty()) {
+            return "Ei hakutuloksia";
         }
         return kaikki;
     }
@@ -78,19 +87,29 @@ public class Reseptikirjasto {
     public String haeAinesosalla(String haku) {
         
         reseptihaku = new ArrayList<Resepti>();
+        ArrayList<Resepti> lajihaku;
+        
         String haetut = "";
         int i = 1;
         
         for (Ruokalaji ruokalaji : ruokalajit) {
+            lajihaku = ruokalaji.ainesHaku(haku);
             
-            haetut += ruokalaji.getNimi() + "\n";
+            if (lajihaku.isEmpty()) {
+            } else {
+                haetut += ruokalaji.getNimi() + "\n";
             
-            for (Resepti resepti : ruokalaji.ainesHaku(haku)) {
-                reseptihaku.add(resepti);
-                haetut += i + " " + resepti.getNimi() + "\n";
-                i++;
+                for (Resepti resepti : lajihaku) {
+                    reseptihaku.add(resepti);
+                    haetut += i + " " + resepti.getNimi() + "\n";
+                    i++;
+                }
+                haetut += "\n";
             }
-            haetut += "\n";
+        }
+        
+        if (reseptihaku.isEmpty()) {
+            return "Ei hakutuloksia";
         }
         return haetut;
     }
@@ -98,18 +117,30 @@ public class Reseptikirjasto {
     public String haeNimella(String haku) {
         
         reseptihaku = new ArrayList<Resepti>();
+        ArrayList<Resepti> lajihaku;
+        
         String haetut = "";
         int i = 1;
         
         for (Ruokalaji ruokalaji : ruokalajit) {
-            haetut += ruokalaji.getNimi() + "\n";
+            lajihaku = ruokalaji.nimiHaku(haku);
             
-            for (Resepti resepti : ruokalaji.nimiHaku(haku)) {
-                reseptihaku.add(resepti);
-                haetut += i + " " + resepti.getNimi() + "\n";
-                i++;
+            if (lajihaku.isEmpty()) {
+            
+            } else {
+                haetut += ruokalaji.getNimi() + "\n";
+            
+                for (Resepti resepti : lajihaku) {
+                    reseptihaku.add(resepti);
+                    haetut += i + " " + resepti.getNimi() + "\n";
+                    i++;
+                }
             }
             haetut += "\n";
+        }
+        
+        if (reseptihaku.isEmpty()) {
+            return "Ei hakutuloksia";
         }
         return haetut;
     }
@@ -117,7 +148,7 @@ public class Reseptikirjasto {
     
     public String haeTuloksista(int haku) {
         
-        if (haku > ruokalajit.size() || haku < 1 || ruokalajit == null) {
+        if (haku > ruokalajit.size() || haku < 1) {
             return "Ei löydy";
             
         }else {

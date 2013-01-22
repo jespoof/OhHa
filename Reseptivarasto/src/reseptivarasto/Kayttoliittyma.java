@@ -49,7 +49,6 @@ public class Kayttoliittyma {
                 System.out.println("7 Lopeta");
                 System.out.println("");
                 
-                
                 String kasky = lukija.nextLine();
                 System.out.println("");
                 
@@ -57,12 +56,31 @@ public class Kayttoliittyma {
                     
                     System.out.println("LISÄÄ RESEPTI");
                     System.out.println("");
+                    int laji = 0;
                     
-                    System.out.println("Mikä ruokalaji?");
-                    System.out.println(kirjasto.toString());
-                    int laji = Integer.parseInt(lukija.nextLine());
+                    while (true) {
+                        while (true) {
+                            System.out.println("Mikä ruokalaji?");
+                            System.out.println(kirjasto.toString());
+                        
+                            try {
+                                laji = Integer.parseInt(lukija.nextLine());
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Et syöttänyt kunnollista numeroa.");
+                                System.out.println("");
+                            }
+                        }
+                        
+                        if (laji <= kirjasto.getRuokalajienMaara() && laji > 0) {
+                            break;
+                        }else{
+                            System.out.println("Ei ruokalajia! Valitse uudestaan");
+                            System.out.println("");
+                        }
+                    }
+                    
                     System.out.println("");
-                
                     System.out.print("Reseptin nimi: ");
                     String nimi = lukija.nextLine();
                     
@@ -71,19 +89,15 @@ public class Kayttoliittyma {
                     lisaaAineksia();
                     
                     while (true) {
-                        
                         System.out.println("Lisätäänkö lisää aineksia? (K/E)");
                         
                         String komento = lukija.nextLine();
                         
                         if (komento.equals("K")) {
                             lisaaAineksia();
-                        }
-                        
-                        if (komento.equals("E")) {
+                        }else if (komento.equals("E")) {
                             break;
                         }
-                        
                     }
                     
                     System.out.println("");
@@ -93,7 +107,6 @@ public class Kayttoliittyma {
                     kirjasto.lisaaResepti(laji, new Resepti(nimi, ainekset, ohjeet));
                     
                     System.out.println("");
-                    System.out.println("");
                 }
                 
                 if (kasky.equals("2")) {
@@ -102,10 +115,8 @@ public class Kayttoliittyma {
                 }
                 
                 if (kasky.equals("3")) {
-                    
                     hakuRuokalajista();
-                       
-                }
+                 }
                 
                 if (kasky.equals("4")) {
                     
@@ -118,13 +129,8 @@ public class Kayttoliittyma {
                     String haetaanko = lukija.nextLine();
                     
                     if (haetaanko.equals("K")) {
-                        
                         mikaHakutuloksista();
-                        
-                    }
-                    
-                    if (haetaanko.equals("E")) {
-                        
+                    } else if (haetaanko.equals("E")) {
                     }
                     
                 }
@@ -138,12 +144,13 @@ public class Kayttoliittyma {
                     String nimihaku = lukija.nextLine();
                     
                     System.out.println("");
-                    System.out.println(kirjasto.haeNimella(nimihaku));
                     
-                    System.out.println("");
-                    System.out.println("");
-                    
-                    mikaHakutuloksista();
+                    if (kirjasto.haeNimella(nimihaku).equals("Ei hakutuloksia")) {
+                        System.out.println(kirjasto.haeNimella(nimihaku));
+                    }else {
+                        System.out.println(kirjasto.haeNimella(nimihaku));
+                        mikaHakutuloksista();
+                    }
                     
                 }
                 
@@ -157,17 +164,16 @@ public class Kayttoliittyma {
                     String aineshaku = lukija.nextLine();
                     
                     System.out.println("");
-                    System.out.println(kirjasto.haeAinesosalla(aineshaku));
                     
-                    System.out.println("");
-                    System.out.println("");
-                    
-                    mikaHakutuloksista();
-                    
+                    if (kirjasto.haeAinesosalla(aineshaku).equals("Ei hakutuloksia")) {
+                        System.out.println(kirjasto.haeAinesosalla(aineshaku));
+                    }else {
+                        System.out.println(kirjasto.haeAinesosalla(aineshaku));
+                        mikaHakutuloksista();
+                    }
                 }
                 
                 if (kasky.equals("7")) {
-                
                     break;
                 }
             }
@@ -201,8 +207,18 @@ public class Kayttoliittyma {
             System.out.println(kirjasto.listaaRuokalajinReseptit(num));
             System.out.println("");
                         
-            System.out.println("Minkä reseptin haluat?");
-            int num2 = Integer.parseInt(lukija.nextLine());
+            int num2 = 0;
+            
+            while (true) {
+                System.out.println("Minkä reseptin haluat?");
+            
+                try {
+                    num2 = Integer.parseInt(lukija.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Et syöttänyt kunnollista numeroa.");
+                }
+            }
             
             System.out.println("");
             System.out.println("---");
@@ -216,10 +232,7 @@ public class Kayttoliittyma {
             String valinta = lukija.nextLine();
                         
             if (valinta.equals("K")) {
-                            
-            }
-                        
-            if (valinta.equals("E")) {
+            }else if (valinta.equals("E")) {
                 break;
             }
         }
@@ -230,24 +243,49 @@ public class Kayttoliittyma {
         
         System.out.println("RESEPTIHAKU RUOKALAJIN MUKAAN");
         System.out.println("");
+        int num = 0;
+        
+        while (true) {
+            System.out.println("Valitse ruokalaji:");
+            System.out.println(kirjasto.toString());
+            try {
+                num = Integer.parseInt(lukija.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Et syöttänyt kunnollista numeroa.");
+                System.out.println("");
+            }
+        }
                 
-        System.out.println("Valitse ruokalaji:");
-        System.out.println(kirjasto.toString());
-                    
-        int num = Integer.parseInt(lukija.nextLine());
         System.out.println("");
-                    
         reseptinHaku(num);
     }
     
     
     public void mikaHakutuloksista() {
         
-        System.out.println("Minkä reseptin ohjeen haluat?");
-        int haku = Integer.parseInt(lukija.nextLine());
+        int haku = 0;
+        
+        while (true) {
+            System.out.println("Minkä reseptin ohjeen haluat?");
+            try {
+                haku = Integer.parseInt(lukija.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Et syöttänyt kunnollista numeroa.");
+                System.out.println("");
+            }
+        }
+        
         System.out.println("");
         System.out.println("---");
+        
+        try {
         System.out.println(kirjasto.haeTuloksista(haku));
+        } catch (Exception e) {
+        System.out.println("Reseptiä ei löydy.");
+        }
+        
         System.out.println("---");
         System.out.println("");
         

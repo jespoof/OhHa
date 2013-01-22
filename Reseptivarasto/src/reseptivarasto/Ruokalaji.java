@@ -52,6 +52,7 @@ public class Ruokalaji {
                 reseptihaku.add(resepti);
             }
         }
+        
         return reseptihaku;
     }
     
