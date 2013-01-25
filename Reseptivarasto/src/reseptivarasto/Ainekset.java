@@ -63,7 +63,7 @@ public class Ainekset {
         String tiedosto = "";
         
         for (Ainesosa a : aines) {
-            tiedosto += a.getNimi()+"%@"+a.getMaara()+"#!";
+            tiedosto += a.getNimi()+"%@"+a.getMaara()+"#/";
         }
         
         return tiedosto;

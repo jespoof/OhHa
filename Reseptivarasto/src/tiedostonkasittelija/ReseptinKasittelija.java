@@ -82,7 +82,7 @@ public class ReseptinKasittelija {
     }
     
     public Resepti luoResepti(String lue) {
-        String r[] = lue.split("&=");
+        String r[] = lue.split("&!");
         
         String nimi = r[0];
         String ainekset1 = r[1];
@@ -98,7 +98,7 @@ public class ReseptinKasittelija {
     
     public Ainekset kasitteleAinekset (String ainekset1){
         
-        String r[] = ainekset1.split("#!");
+        String r[] = ainekset1.split("#/");
         Ainekset a = new Ainekset();
         
         for (String s : r) {
@@ -127,7 +127,7 @@ public class ReseptinKasittelija {
         FileWriter kirjoittaja = new FileWriter(tiedosto);
         
         for (Resepti r : reseptit) {
-            kirjoittaja.write(r.getNimi() + "&=" + r.tiedostoon() + "&=" + r.getOhjeet() + "\n");
+            kirjoittaja.write(r.getNimi() + "&!" + r.tiedostoon() + "&!" + r.getOhjeet() + "\n");
             
         }
         

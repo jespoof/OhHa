@@ -5,6 +5,7 @@
 package reseptivarasto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import tiedostonkasittelija.ReseptinKasittelija;
 
 /**
@@ -26,6 +27,7 @@ public class Ruokalaji {
     public Ruokalaji (String nimi, ArrayList<Resepti> reseptit) {
         this.nimi = nimi;
         this.reseptit = reseptit;
+        Collections.sort(reseptit);
     }
     
     public String getNimi() {
@@ -33,6 +35,8 @@ public class Ruokalaji {
     }
     
     public ArrayList<Resepti> getReseptit() {
+        
+        Collections.sort(reseptit);
         return this.reseptit;
     }
     
@@ -60,6 +64,7 @@ public class Ruokalaji {
             }
         }
         
+        Collections.sort(reseptihaku);
         return reseptihaku;
     }
     
@@ -73,6 +78,8 @@ public class Ruokalaji {
                reseptihaku.add(resepti);
             }
         }
+        
+        Collections.sort(reseptihaku);
         return reseptihaku;
     }
     

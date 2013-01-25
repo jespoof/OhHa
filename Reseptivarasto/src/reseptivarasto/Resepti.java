@@ -8,7 +8,7 @@ package reseptivarasto;
  *
  * @author Johanna
  */
-public class Resepti {
+public class Resepti implements Comparable<Resepti>{
     
     private String nimi;
     private Ainekset ainekset;
@@ -64,6 +64,11 @@ public class Resepti {
     
     public String tiedostoon() {
         return ainekset.tiedostoon();
+    }
+
+    @Override
+    public int compareTo(Resepti resepti) {
+        return this.nimi.compareToIgnoreCase(resepti.getNimi());
     }
     
 }

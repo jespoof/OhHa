@@ -7,7 +7,7 @@ package reseptivarasto;
 import java.io.IOException;
 import java.util.Scanner;
 import tiedostonkasittelija.ReseptinKasittelija;
-import tiedostonkasittelija.RuokalajinKasittelija;
+import tiedostonkasittelija.RuokalajienKasittelija;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Tekstikayttoliittyma {
     private Ainekset ainekset;
     private Reseptikirjasto kirjasto;
     
-    RuokalajinKasittelija ruokalajikasittelija;
+    RuokalajienKasittelija ruokalajikasittelija;
     ReseptinKasittelija reseptinKasittelija;
     
     public Tekstikayttoliittyma() {
@@ -30,7 +30,7 @@ public class Tekstikayttoliittyma {
 
     public void kaynnista() throws IOException {
         
-            ruokalajikasittelija = new RuokalajinKasittelija("kirjasto.txt");
+            ruokalajikasittelija = new RuokalajienKasittelija("kirjasto.txt");
             
             kirjasto = new Reseptikirjasto(ruokalajikasittelija.lueRuokalajit());
             

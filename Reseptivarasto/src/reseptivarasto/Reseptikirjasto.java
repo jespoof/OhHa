@@ -5,7 +5,7 @@
 package reseptivarasto;
 
 import java.util.ArrayList;
-import tiedostonkasittelija.RuokalajinKasittelija;
+import tiedostonkasittelija.RuokalajienKasittelija;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Reseptikirjasto {
     private ArrayList<Resepti> reseptihaku;
     private int ruokalajienMaara;
     private String tiedostonNimi = "kirjasto.txt";
-    RuokalajinKasittelija kasittelija;
+    RuokalajienKasittelija kasittelija;
     
     public Reseptikirjasto() {
         ruokalajit = new ArrayList<Ruokalaji>();
@@ -34,7 +34,6 @@ public class Reseptikirjasto {
     }
     
     public boolean lisaaResepti(int numero, Resepti resepti) {
-        
         if (numero > ruokalajit.size() || numero < 1) {
             System.out.println("Väärä ruokalaji");
             return false;
@@ -55,7 +54,6 @@ public class Reseptikirjasto {
     }
     
     public String listaaRuokalajinReseptit (int numero) {
-        
         if (numero > ruokalajit.size() || numero < 1) {
             return "Väärä ruokalaji";
             
@@ -68,10 +66,8 @@ public class Reseptikirjasto {
         reseptihaku = new ArrayList<Resepti>();
         String kaikki = "";
         int i = 1;
-        
         for (Ruokalaji ruokalaji : ruokalajit) {
             kaikki += ruokalaji.getNimi() + "\n";
-            
             for (Resepti resepti : ruokalaji.getReseptit()) {
                 reseptihaku.add(resepti);
                 kaikki += i + " " + resepti.getNimi() + "\n";
@@ -86,7 +82,6 @@ public class Reseptikirjasto {
     }
     
     public String haeRuokalajista(int numero, int numero2) {
-        
         if (numero > ruokalajit.size() || numero < 1) {
             return "Väärä ruokalaji";
             
@@ -95,15 +90,11 @@ public class Reseptikirjasto {
         }
     }
     
-
     public String haeAinesosalla(String haku) {
-        
         reseptihaku = new ArrayList<Resepti>();
         ArrayList<Resepti> lajihaku;
-        
         String haetut = "";
         int i = 1;
-        
         for (Ruokalaji ruokalaji : ruokalajit) {
             lajihaku = ruokalaji.ainesHaku(haku);
             
@@ -119,7 +110,6 @@ public class Reseptikirjasto {
                 haetut += "\n";
             }
         }
-        
         if (reseptihaku.isEmpty()) {
             return "Ei hakutuloksia";
         }
@@ -127,16 +117,12 @@ public class Reseptikirjasto {
     }
     
     public String haeNimella(String haku) {
-        
         reseptihaku = new ArrayList<Resepti>();
         ArrayList<Resepti> lajihaku;
-        
         String haetut = "";
         int i = 1;
-        
         for (Ruokalaji ruokalaji : ruokalajit) {
             lajihaku = ruokalaji.nimiHaku(haku);
-            
             if (lajihaku.isEmpty()) {
             
             } else {
@@ -150,13 +136,11 @@ public class Reseptikirjasto {
             }
             haetut += "\n";
         }
-        
         if (reseptihaku.isEmpty()) {
             return "Ei hakutuloksia";
         }
         return haetut;
     }
-    
     
     public String haeTuloksista(int haku) {
         
@@ -186,7 +170,6 @@ public class Reseptikirjasto {
     
     public void ruokalajitTiedostoon() throws Exception {
         kasittelija.kirjoita(ruokalajit);
-        
         for (Ruokalaji ruokalaji : ruokalajit) {
             ruokalaji.reseptitTiedostoon();
         }
