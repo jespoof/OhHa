@@ -22,6 +22,11 @@ public class Ainekset {
         
     }
     
+    
+    public ArrayList<Ainesosa> getAinekset() {
+        return aines;
+    }
+    
     public void lisaaAines(Ainesosa ainesosa) {
         
         this.aines.add(ainesosa);
@@ -52,5 +57,15 @@ public class Ainekset {
         }
         
         return ainekset;
+    }
+    
+    public String tiedostoon() {
+        String tiedosto = "";
+        
+        for (Ainesosa a : aines) {
+            tiedosto += a.getNimi()+"%@"+a.getMaara()+"#!";
+        }
+        
+        return tiedosto;
     }
 }

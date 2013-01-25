@@ -26,9 +26,9 @@ public class Resepti {
         return this.nimi;
     }
     
-    public String getAinekset() {
+    public Ainekset getAinekset() {
         
-        return ainekset.toString();
+        return ainekset;
     }
     
     public String getOhjeet() {
@@ -60,6 +60,10 @@ public class Resepti {
         
         return this.nimi + "\n" + "\n" + "Ainekset:" + "\n" + ainekset.toString() + "\n" + "Valmistusohjeet:" + "\n" + ohjeet;
     }
-        
+    
+    
+    public String tiedostoon() {
+        return ainekset.tiedostoon();
+    }
     
 }

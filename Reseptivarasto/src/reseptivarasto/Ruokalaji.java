@@ -5,6 +5,7 @@
 package reseptivarasto;
 
 import java.util.ArrayList;
+import tiedostonkasittelija.ReseptinKasittelija;
 
 /**
  *
@@ -15,10 +16,16 @@ public class Ruokalaji {
     private String nimi;
     private ArrayList<Resepti> reseptit;
     private ArrayList<Resepti> reseptihaku;
+    ReseptinKasittelija kasittelija;
     
     public Ruokalaji (String nimi) {
         this.nimi = nimi;
         reseptit = new ArrayList<Resepti>();
+    }
+    
+    public Ruokalaji (String nimi, ArrayList<Resepti> reseptit) {
+        this.nimi = nimi;
+        this.reseptit = reseptit;
     }
     
     public String getNimi() {
@@ -81,6 +88,10 @@ public class Ruokalaji {
         return reseptilista;
     }
     
+    public void reseptitTiedostoon() throws Exception {
+        kasittelija.kirjoita(reseptit);
+        
+    }
 
 
 }

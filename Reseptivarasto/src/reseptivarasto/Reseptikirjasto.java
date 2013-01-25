@@ -5,6 +5,7 @@
 package reseptivarasto;
 
 import java.util.ArrayList;
+import tiedostonkasittelija.RuokalajinKasittelija;
 
 /**
  *
@@ -15,10 +16,21 @@ public class Reseptikirjasto {
     private ArrayList<Ruokalaji> ruokalajit;
     private ArrayList<Resepti> reseptihaku;
     private int ruokalajienMaara;
+    private String tiedostonNimi = "kirjasto.txt";
+    RuokalajinKasittelija kasittelija;
     
     public Reseptikirjasto() {
         ruokalajit = new ArrayList<Ruokalaji>();
         ruokalajienMaara = 0;
+    }
+    
+    public Reseptikirjasto(ArrayList<Ruokalaji> ruokalajit) {
+        this.ruokalajit = ruokalajit;
+        ruokalajienMaara = ruokalajit.size();
+    }
+    
+    public ArrayList<Ruokalaji> getRuokalajit() {
+        return ruokalajit;
     }
     
     public boolean lisaaResepti(int numero, Resepti resepti) {
@@ -166,5 +178,17 @@ public class Reseptikirjasto {
             i++;
         }
         return lista;
+    }
+    
+    public String getTiedostonNimi() {
+        return tiedostonNimi;
+    }
+    
+    public void ruokalajitTiedostoon() throws Exception {
+        kasittelija.kirjoita(ruokalajit);
+        
+        for (Ruokalaji ruokalaji : ruokalajit) {
+            ruokalaji.reseptitTiedostoon();
+        }
     }
 }

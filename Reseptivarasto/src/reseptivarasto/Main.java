@@ -4,6 +4,8 @@
  */
 package reseptivarasto;
 
+import java.io.IOException;
+
 /**
  *
  * @author Johanna
@@ -13,9 +15,9 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+        Tekstikayttoliittyma kayttoliittyma = new Tekstikayttoliittyma();
         kayttoliittyma.kaynnista();    
     }
 }
