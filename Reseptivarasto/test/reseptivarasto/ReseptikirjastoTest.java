@@ -75,7 +75,7 @@ public class ReseptikirjastoTest {
         
         String lajit = kirjasto.toString();
         
-        assertEquals("1 Pahaa ruokaa" + "\n" + "2 Pahempaa ruokaa" + "\n", lajit);
+        assertEquals("1 Pahaa ruokaa\n2 Pahempaa ruokaa\n", lajit);
     
     }
     
@@ -99,6 +99,18 @@ public class ReseptikirjastoTest {
     
     }
     
+    @Test
+    public void reseptinPoistoToimii() {
+        kirjasto.lisaaRuokalaji(ruokalaji1);
+        kirjasto.lisaaResepti(1, resepti1);
+        kirjasto.lisaaResepti(1, resepti2);
+        kirjasto.reseptinPoisto(1, 2);
+        
+        String reseptit = kirjasto.listaaKaikkiReseptit();
+        
+        assertEquals("Pahaa ruokaa\n1 Jauhosokeri\n\n", reseptit);
+    
+    }
     
     @Test
     public void ruokalajinReseptilistausToimiiOikeallaNumerolla() {
@@ -108,7 +120,7 @@ public class ReseptikirjastoTest {
         
         String reseptit = kirjasto.listaaRuokalajinReseptit(1);
         
-        assertEquals("Pahaa ruokaa" + "\n" + "1 Jauhosokeri" + "\n", reseptit);
+        assertEquals("Pahaa ruokaa\n1 Jauhosokeri\n", reseptit);
     
     }
     
@@ -132,7 +144,7 @@ public class ReseptikirjastoTest {
         
         String reseptit = kirjasto.haeRuokalajista(1, 1);
         
-        assertEquals("Jauhosokeri" + "\n" + "\n" + "Ainekset:" + "\n" + "  jauho, 5 dl" + "\n" + "  sokeri, 2 dl" + "\n" + "\n" + "Valmistusohjeet:" + "\n" + "Sekoita jauhot ja sokeri", reseptit);
+        assertEquals("Jauhosokeri\n\nAinekset:\n  jauho, 5 dl\n  sokeri, 2 dl" + "\n" + "\n" + "Valmistusohjeet:" + "\n" + "Sekoita jauhot ja sokeri", reseptit);
     
     }
     
@@ -156,7 +168,7 @@ public class ReseptikirjastoTest {
         
         String reseptit = kirjasto.haeAinesosalla("jauho");
         
-        assertEquals("Pahaa ruokaa" + "\n" + "1 Jauhosokeri" + "\n" + "\n", reseptit);
+        assertEquals("Pahaa ruokaa\n1 Jauhosokeri\n\n", reseptit);
     
     }
     
@@ -168,7 +180,7 @@ public class ReseptikirjastoTest {
         
         String reseptit = kirjasto.haeNimella("Jauhosokeri");
         
-        assertEquals("Pahaa ruokaa" + "\n" + "1 Jauhosokeri" + "\n" + "\n", reseptit);
+        assertEquals("Pahaa ruokaa\n1 Jauhosokeri\n\n", reseptit);
     
     }
     
@@ -183,7 +195,7 @@ public class ReseptikirjastoTest {
         
         String reseptit = kirjasto.listaaKaikkiReseptit();
         
-        assertEquals("Pahaa ruokaa" + "\n" + "1 Suolavesi" + "\n" + "\n" + "Pahempaa ruokaa" + "\n" + "2 Jauhosokeri" + "\n" +  "\n", reseptit);
+        assertEquals("Pahaa ruokaa\n1 Suolavesi\n\nPahempaa ruokaa\n2 Jauhosokeri\n\n", reseptit);
     
     }
     

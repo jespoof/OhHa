@@ -47,7 +47,7 @@ public class ReseptiTest {
         
         String resepti1 = resepti.toString();
         
-        assertEquals("Jauhosokeri" + "\n" + "\n" + "Ainekset:" + "\n" + "  jauho, 5 dl" + "\n" + "  sokeri, 2 dl" + "\n" + "\n" + "Valmistusohjeet:" + "\n" + "Sekoita jauhot ja sokeri", resepti1);
+        assertEquals("Jauhosokeri\n\nAinekset:\n  jauho, 5 dl\n  sokeri, 2 dl\n\nValmistusohjeet:\nSekoita jauhot ja sokeri", resepti1);
     
     }
 }

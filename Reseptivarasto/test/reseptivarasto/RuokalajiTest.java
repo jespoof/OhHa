@@ -66,9 +66,26 @@ public class RuokalajiTest {
         
         String ruokalajinReseptit = ruokalaji.toString();
         
-        assertEquals("1 Jauhosokeri" + "\n" + "2 Suolavesi" + "\n", ruokalajinReseptit);
+        assertEquals("1 Jauhosokeri\n2 Suolavesi\n", ruokalajinReseptit);
     
    }
+    
+    @Test
+    public void reseptinPoistoToimii() {
+        
+        resepti = new Resepti("Jauhosokeri", ainekset1, "Sekoita jauhot ja sokeri");
+        resepti2 = new Resepti("Suolavesi", ainekset2, "Lisää suola veteen");
+        
+        ruokalaji.lisaaResepti(resepti);
+        ruokalaji.lisaaResepti(resepti2);
+        
+        ruokalaji.poistaResepti(2);
+        
+        String ruokalajinReseptit = ruokalaji.toString();
+        
+        assertEquals("1 Jauhosokeri" + "\n", ruokalajinReseptit);
+    }
+    
     
     @Test
     public void haeReseptiToimiiOikeallaNumerolla() {
@@ -81,7 +98,7 @@ public class RuokalajiTest {
         
         String oikeaHaku = ruokalaji.haeResepti(1);
         
-        assertEquals("Jauhosokeri" + "\n" + "\n" + "Ainekset:" + "\n" + "  jauho, 5 dl" + "\n" + "  sokeri, 2 dl" + "\n" + "\n" + "Valmistusohjeet:" + "\n" + "Sekoita jauhot ja sokeri", oikeaHaku);
+        assertEquals("Jauhosokeri\n\nAinekset:\n  jauho, 5 dl\n  sokeri, 2 dl\n\nValmistusohjeet:\nSekoita jauhot ja sokeri", oikeaHaku);
     
    }
     

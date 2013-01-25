@@ -14,6 +14,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import reseptivarasto.Ainekset;
+import reseptivarasto.Ainesosa;
+import reseptivarasto.Resepti;
 import reseptivarasto.Reseptikirjasto;
 import reseptivarasto.Ruokalaji;
 
@@ -26,22 +29,15 @@ public class RuokalajienKasittelijaTest {
     RuokalajienKasittelija kasittelija;
     File tiedosto;
     FileWriter kirjoittaja;
-    Reseptikirjasto kirjasto;
     ArrayList<Ruokalaji> ruokalajit;
     
     public RuokalajienKasittelijaTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() throws IOException {
+        
         
     }
     
@@ -52,22 +48,38 @@ public class RuokalajienKasittelijaTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void ruokalajitKirjoitetaanJaLuetaanOikein() throws IOException {
+    public void tiedostonLukeminenOnnistuu() throws IOException {
         
-        tiedosto = new File("testikirjasto.txt");
+        kasittelija = new RuokalajienKasittelija("test/testikirjasto.txt");
+        
+        tiedosto = new File("test/testikirjasto.txt");
         kirjoittaja = new FileWriter(tiedosto);
-        
-        kirjoittaja.write("Pahaa ruokaa\nHyvää ruokaa");
+        kirjoittaja.write("test/Pahaa ruokaa\ntest/Hyvaa ruokaa");
         kirjoittaja.close();
         
-        kasittelija = new RuokalajienKasittelija("testikirjasto.txt");
-        kirjasto = new Reseptikirjasto(kasittelija.lueRuokalajit());
+        ruokalajit = kasittelija.lueRuokalajit();
+        Reseptikirjasto testikirjasto = new Reseptikirjasto(ruokalajit);
         
-        kirjasto.lisaaRuokalaji(new Ruokalaji("oho"));
-        
-        String lista = kirjasto.toString();
-        
-        assertEquals("1 Huonoa ruokaa\n2 Hyvaa ruokaa \n", lista);
+        assertEquals("1 test/Pahaa ruokaa\n2 test/Hyvaa ruokaa\n", testikirjasto.toString());
     
+    }
+    
+    @Test
+    public void tiedostonKirjoittaminenJaLukeminen() throws IOException {
+        
+        kasittelija = new RuokalajienKasittelija("test/testikirjasto.txt");
+        
+        Reseptikirjasto testikirjasto = new Reseptikirjasto();
+        Ruokalaji testiruokalaji = new Ruokalaji("test/testiruokalaji1");
+        testikirjasto.lisaaRuokalaji(testiruokalaji);
+        
+        kasittelija.kirjoita(testikirjasto.getRuokalajit());
+        
+        kasittelija = new RuokalajienKasittelija("test/testikirjasto.txt");
+        ruokalajit = kasittelija.lueRuokalajit();
+        Reseptikirjasto testikirjasto1 = new Reseptikirjasto(ruokalajit);
+
+        assertEquals("1 test/testiruokalaji1\n", testikirjasto.toString());
+       
     }
 }

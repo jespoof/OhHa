@@ -54,6 +54,18 @@ public class Ruokalaji {
         }
     }
     
+    public boolean poistaResepti(int numero) {
+        
+        if (numero > reseptit.size() || numero < 1) {
+            System.out.println("Ei reseptiä");
+            return false;
+        
+        }else {
+            reseptit.remove(numero-1);
+            return true;
+        }
+    }
+    
     public ArrayList<Resepti> ainesHaku(String haku) {
         reseptihaku = new ArrayList<Resepti>();
         

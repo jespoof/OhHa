@@ -43,7 +43,7 @@ public class Tekstikayttoliittyma {
                 System.out.println("");
                 System.out.println("Valitse toiminnon numero:");
                 System.out.println("1 Lisää resepti");
-                System.out.println("2 Muokkaa reseptiä");
+                System.out.println("2 Poista resepti");
                 System.out.println("3 Reseptihaku ruokalajin mukaan");
                 System.out.println("4 Listaa kaikki reseptit");
                 System.out.println("5 Etsi reseptiä nimen mukaan");
@@ -112,12 +112,45 @@ public class Tekstikayttoliittyma {
                 }
                 
                 if (kasky.equals("2")) {
+                    System.out.println("POISTA RESEPTI");
+                    System.out.println("");
+                    
+                    int laji = hakuRuokalajista();
+                    int poisto = reseptinHaku(laji);
+                    
+                    System.out.println("Poistetaanko varmasti? (K/E)");
+                    String varmistus = lukija.nextLine();
+                    
+                    if (varmistus.equals("K")) {
+                        kirjasto.reseptinPoisto(laji, poisto);
+                    } else if (varmistus.equals("E")) {
+                    }
                 
-                    //Toteutetaan myöhemmin
                 }
                 
                 if (kasky.equals("3")) {
-                    hakuRuokalajista();
+                    
+                    System.out.println("RESEPTIHAKU RUOKALAJIN MUKAAN");
+                    System.out.println("");
+                    
+                    int num = hakuRuokalajista();
+                    int num2 = reseptinHaku(num);
+                    
+                    System.out.println("");
+                    System.out.println("---");
+                        
+                    System.out.println(kirjasto.haeRuokalajista(num, num2));
+            
+                    System.out.println("---");
+                    System.out.println("");
+                        
+                    System.out.println("Lopeta ohjelma? (K/E)");
+                    String valinta = lukija.nextLine();
+                        
+                    if (valinta.equals("K")) {
+                        return;
+                    }else if (valinta.equals("E")) {
+                    }
                  }
                 
                 if (kasky.equals("4")) {
@@ -204,7 +237,7 @@ public class Tekstikayttoliittyma {
     }
     
     
-    public void reseptinHaku(int num) {
+    public int reseptinHaku(int num) {
         
         while (true) {
                         
@@ -214,7 +247,7 @@ public class Tekstikayttoliittyma {
             int num2 = 0;
             
             while (true) {
-                System.out.println("Minkä reseptin haluat?");
+                System.out.println("Mikä resepti?");
             
                 try {
                     num2 = Integer.parseInt(lukija.nextLine());
@@ -224,29 +257,14 @@ public class Tekstikayttoliittyma {
                 }
             }
             
-            System.out.println("");
-            System.out.println("---");
-                        
-            System.out.println(kirjasto.haeRuokalajista(num, num2));
+            return num2;
             
-            System.out.println("---");
-            System.out.println("");
-                        
-            System.out.println("Haetaanko toinen resepti tästä ruokalajista? (K/E)");
-            String valinta = lukija.nextLine();
-                        
-            if (valinta.equals("K")) {
-            }else if (valinta.equals("E")) {
-                return;
-            }
         }
     }
     
     
-    public void hakuRuokalajista() {
+    public int hakuRuokalajista() {
         
-        System.out.println("RESEPTIHAKU RUOKALAJIN MUKAAN");
-        System.out.println("");
         int num = 0;
         
         while (true) {
@@ -263,7 +281,7 @@ public class Tekstikayttoliittyma {
         }
                 
         System.out.println("");
-        reseptinHaku(num);
+        return num;
     }
     
     

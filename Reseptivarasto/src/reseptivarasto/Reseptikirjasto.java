@@ -90,6 +90,19 @@ public class Reseptikirjasto {
         }
     }
     
+    public boolean reseptinPoisto(int numero, int numero2) {
+        if (numero > ruokalajit.size() || numero < 1) {
+            System.out.println("Väärä ruokalaji");
+            return false;
+            
+        }else {
+            if(ruokalajit.get(numero-1).poistaResepti(numero2)==true) {
+                return true;
+            }
+            return false;
+        }
+    }
+    
     public String haeAinesosalla(String haku) {
         reseptihaku = new ArrayList<Resepti>();
         ArrayList<Resepti> lajihaku;

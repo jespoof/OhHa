@@ -42,6 +42,6 @@ public class AineksetTest {
         String aineslista = ainekset.toString();
         
 
-        assertEquals("  jauho, 5 dl" + "\n" + "  sokeri, 2 dl" + "\n", aineslista);
+        assertEquals("  jauho, 5 dl\n  sokeri, 2 dl\n", aineslista);
   }
 }
