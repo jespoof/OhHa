@@ -73,7 +73,7 @@ public class RuokalajienKasittelijaTest {
         Ruokalaji testiruokalaji = new Ruokalaji("test/testiruokalaji1");
         testikirjasto.lisaaRuokalaji(testiruokalaji);
         
-        kasittelija.kirjoita(testikirjasto.getRuokalajit());
+        kasittelija.kirjoitaRuokalajit(testikirjasto.getRuokalajit());
         
         kasittelija = new RuokalajienKasittelija("test/testikirjasto.txt");
         ruokalajit = kasittelija.lueRuokalajit();

@@ -56,7 +56,7 @@ public class RuokalajienKasittelija {
             uusiTiedosto();
         }
         
-        ArrayList luettu = listaus();
+        ArrayList luettu = ruokalajienListaus();
         
         return luettu;
     }
@@ -72,7 +72,7 @@ public class RuokalajienKasittelija {
         }
     }
     
-    public ArrayList<Ruokalaji> listaus() throws IOException {
+    public ArrayList<Ruokalaji> ruokalajienListaus() throws IOException {
         
         ruokalajit = new ArrayList<Ruokalaji>();
         
@@ -85,7 +85,7 @@ public class RuokalajienKasittelija {
         return ruokalajit;
     }
     
-    public void kirjoita(ArrayList<Ruokalaji> lajit) throws IOException {
+    public void kirjoitaRuokalajit(ArrayList<Ruokalaji> lajit) throws IOException {
         rivit.clear();
         
         File tiedosto = new File(tiedostonNimi);
@@ -94,7 +94,7 @@ public class RuokalajienKasittelija {
         for (Ruokalaji laji : lajit) {
             
             kasittelija = new ReseptinKasittelija(laji);
-            kasittelija.kirjoita(laji.getReseptit());
+            kasittelija.kirjoitaReseptit(laji.getReseptit());
             kirjoittaja.write(laji.getNimi() + "\n");
         }
         

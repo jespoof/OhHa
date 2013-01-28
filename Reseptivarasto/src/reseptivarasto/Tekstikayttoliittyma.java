@@ -6,6 +6,10 @@ package reseptivarasto;
 
 import java.io.IOException;
 import java.util.Scanner;
+import reseptivarasto.Ainekset;
+import reseptivarasto.Ainesosa;
+import reseptivarasto.Resepti;
+import reseptivarasto.Reseptikirjasto;
 import tiedostonkasittelija.ReseptinKasittelija;
 import tiedostonkasittelija.RuokalajienKasittelija;
 
@@ -21,7 +25,6 @@ public class Tekstikayttoliittyma {
     private Reseptikirjasto kirjasto;
     
     RuokalajienKasittelija ruokalajikasittelija;
-    ReseptinKasittelija reseptinKasittelija;
     
     public Tekstikayttoliittyma() {
         
@@ -210,7 +213,7 @@ public class Tekstikayttoliittyma {
                 
                 if (kasky.equals("7")) {
                     
-                    ruokalajikasittelija.kirjoita(kirjasto.getRuokalajit());
+                    ruokalajikasittelija.kirjoitaRuokalajit(kirjasto.getRuokalajit());
                     break;
                 }
             }

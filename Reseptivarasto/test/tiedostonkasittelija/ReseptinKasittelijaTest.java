@@ -91,7 +91,7 @@ public class ReseptinKasittelijaTest {
         Resepti resepti2 = new Resepti("Suklaapatukka", ainekset2, "Ota kaare pois suklaapatukan paalta, syo");
         ruokalaji.lisaaResepti(resepti2);
         
-        kasittelija.kirjoita(ruokalaji.getReseptit());
+        kasittelija.kirjoitaReseptit(ruokalaji.getReseptit());
         
         reseptit = kasittelija.lueReseptit();
         ruokalaji = new Ruokalaji("testiruokalaji", reseptit);

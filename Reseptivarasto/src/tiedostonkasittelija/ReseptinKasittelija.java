@@ -120,7 +120,7 @@ public class ReseptinKasittelija {
         return osa;
     }
     
-    public void kirjoita(ArrayList<Resepti> reseptit) throws IOException{
+    public void kirjoitaReseptit(ArrayList<Resepti> reseptit) throws IOException{
         rivit.clear();
         
         File tiedosto = new File(tiedostonNimi);
@@ -128,7 +128,6 @@ public class ReseptinKasittelija {
         
         for (Resepti r : reseptit) {
             kirjoittaja.write(r.getNimi() + "&!" + r.tiedostoon() + "&!" + r.getOhjeet() + "\n");
-            
         }
         
         kirjoittaja.close();
