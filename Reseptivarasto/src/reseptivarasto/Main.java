@@ -4,7 +4,9 @@
  */
 package reseptivarasto;
 
+import kayttoliittyma.Tekstikayttoliittyma;
 import java.io.IOException;
+import kayttoliittyma.GraafinenKayttoliittyma;
 
 /**
  *
@@ -17,8 +19,11 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         
-        Tekstikayttoliittyma kayttoliittyma = new Tekstikayttoliittyma();
-        kayttoliittyma.kaynnista();  
+        //Tekstikayttoliittyma kayttoliittyma = new Tekstikayttoliittyma();
+        //kayttoliittyma.kaynnista();  
+        
+        GraafinenKayttoliittyma gKayttoliittyma = new GraafinenKayttoliittyma();
+        gKayttoliittyma.kaynnista();
         
     }
 }
