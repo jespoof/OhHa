@@ -2,13 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package reseptivarasto;
+package kayttoliittyma;
 
 import java.io.IOException;
 import java.util.Scanner;
 import reseptivarasto.Ainekset;
+import reseptivarasto.Ainekset;
+import reseptivarasto.Ainesosa;
 import reseptivarasto.Ainesosa;
 import reseptivarasto.Resepti;
+import reseptivarasto.Resepti;
+import reseptivarasto.Reseptikirjasto;
 import reseptivarasto.Reseptikirjasto;
 import tiedostonkasittelija.ReseptinKasittelija;
 import tiedostonkasittelija.RuokalajienKasittelija;
