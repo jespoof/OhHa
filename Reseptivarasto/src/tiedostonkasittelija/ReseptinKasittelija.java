@@ -9,32 +9,34 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import reseptivarasto.Ainekset;
-import reseptivarasto.Ainesosa;
-import reseptivarasto.Resepti;
-import reseptivarasto.Ruokalaji;
+import reseptivarasto.domain.Ainekset;
+import reseptivarasto.domain.Ainesosa;
+import reseptivarasto.domain.Resepti;
+import reseptivarasto.domain.Ruokalaji;
 
 /**
  *
  * @author Johanna
+ * ReseptinKasittelija kirjoittaa ja lukee ruokalajien mukaan nimettyjä
+ * tiedostoja, jotka sisältävät reseptit.
  */
 public class ReseptinKasittelija {
     private Ruokalaji ruokalaji;
     private String tiedostonNimi;
-    private ArrayList<String> rivit;
+    private String rivit;
 
     public ReseptinKasittelija(Ruokalaji ruokalaji) throws IOException {
         
         this.ruokalaji = ruokalaji;
         this.tiedostonNimi = ruokalaji.getNimi()+".txt";
-        this.rivit = new ArrayList<String>();
+        this.rivit = new String();
 
     }
     
     public ReseptinKasittelija(String tiedostonNimi) {
         
         this.tiedostonNimi = tiedostonNimi;
-        this.rivit = new ArrayList<String>();
+        this.rivit = new String();
         
     }
     
@@ -45,7 +47,7 @@ public class ReseptinKasittelija {
         try {
             Scanner lukija = new Scanner(tiedosto, "UTF-8");
             while (lukija.hasNextLine()) {
-                rivit.add(lukija.nextLine());
+                rivit += lukija.nextLine();
             }
             lukija.close();
         } catch (Exception eiTiedostoa) {
@@ -71,11 +73,14 @@ public class ReseptinKasittelija {
     
     public ArrayList<Resepti> listaaReseptit() throws IOException {
         
+        String res[] = rivit.split("///=");
         ArrayList<Resepti> reseptit = new ArrayList<Resepti>();
         
-        for (String rivi : rivit) {
-            Resepti r = luoResepti(rivi);
-            reseptit.add(r);
+        for (String s : res) {
+            if (!s.isEmpty()) {
+                Resepti r = luoResepti(s);
+                reseptit.add(r);
+            }
         }
         
         return reseptit;
@@ -121,13 +126,13 @@ public class ReseptinKasittelija {
     }
     
     public void kirjoitaReseptit(ArrayList<Resepti> reseptit) throws IOException{
-        rivit.clear();
+        rivit = "";
         
         File tiedosto = new File(tiedostonNimi);
         FileWriter kirjoittaja = new FileWriter(tiedosto);
         
         for (Resepti r : reseptit) {
-            kirjoittaja.write(r.getNimi() + "&!" + r.tiedostoon() + "&!" + r.getOhjeet() + "\n");
+            kirjoittaja.write(r.getNimi() + "&!" + r.tiedostoon() + "&!" + r.getOhjeet() + "///=");
         }
         
         kirjoittaja.close();

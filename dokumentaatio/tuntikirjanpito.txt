@@ -13,3 +13,7 @@ päivä	aika	kohde
 25.1	5 h	Tiedostonkäsittelijätestien tekemistä, reseptin poistotoiminto
 28.1	1 h	Pientä korjailua
 30.1	5 h	Graafisen käyttöliittymän aloittaminen
+1.2	2 h	Graafista käyttöliittymää
+2.2 	3 h 	Graafista käyttöliittymää
+3.2	5 h	Graafista käyttöliittymää
+4.2	5 h	Graafista käyttöliittymää, sekvenssikaavioita, JavaDocin aloittaminen

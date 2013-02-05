@@ -6,20 +6,16 @@ package kayttoliittyma;
 
 import java.io.IOException;
 import java.util.Scanner;
-import reseptivarasto.Ainekset;
-import reseptivarasto.Ainekset;
-import reseptivarasto.Ainesosa;
-import reseptivarasto.Ainesosa;
-import reseptivarasto.Resepti;
-import reseptivarasto.Resepti;
-import reseptivarasto.Reseptikirjasto;
-import reseptivarasto.Reseptikirjasto;
-import tiedostonkasittelija.ReseptinKasittelija;
+import reseptivarasto.domain.Ainekset;
+import reseptivarasto.domain.Ainesosa;
+import reseptivarasto.domain.Resepti;
+import reseptivarasto.domain.Reseptikirjasto;
 import tiedostonkasittelija.RuokalajienKasittelija;
 
 /**
  *
  * @author Johanna
+ * Tekstikayttoliittyma on ohjelman tekstikayttoliittyma.
  */
 public class Tekstikayttoliittyma {
     

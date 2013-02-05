@@ -14,11 +14,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import reseptivarasto.Ainekset;
-import reseptivarasto.Ainesosa;
-import reseptivarasto.Resepti;
-import reseptivarasto.Reseptikirjasto;
-import reseptivarasto.Ruokalaji;
+import reseptivarasto.domain.Ainekset;
+import reseptivarasto.domain.Ainesosa;
+import reseptivarasto.domain.Resepti;
+import reseptivarasto.domain.Reseptikirjasto;
+import reseptivarasto.domain.Ruokalaji;
 
 /**
  *
@@ -47,15 +47,16 @@ public class ReseptinKasittelijaTest {
     @Before
     public void setUp() throws IOException {
         
-        tiedosto = new File("test/testiruokalaji.txt");
+        tiedosto = new File("testiruokalaji.txt");
         kirjoittaja = new FileWriter(tiedosto);
         
-        kirjoittaja.write("Puuro&!Puurohiutale%@1 pussillinen#/Vesi%@2dl#/&!Keita vesi, lisaa hiutaleet\nKeitto&!Purkkikeitto%@1 purkki#/&!Keita");
+        kirjoittaja.write("Puuro&!Puurohiutale%@1 pussillinen#/Vesi%@2dl#/&!Keita vesi, lisaa hiutaleet///=Keitto&!Purkkikeitto%@1 purkki#/&!Keita///=");
         kirjoittaja.close();
     }
     
     @After
     public void tearDown() {
+        tiedosto.deleteOnExit();
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
@@ -63,7 +64,7 @@ public class ReseptinKasittelijaTest {
     @Test
     public void tiedostonLukeminen() throws IOException {
     
-        kasittelija = new ReseptinKasittelija("test/testiruokalaji.txt");
+        kasittelija = new ReseptinKasittelija("testiruokalaji.txt");
         
         reseptit = kasittelija.lueReseptit();
         ruokalaji = new Ruokalaji("testiruokalaji", reseptit);
@@ -74,7 +75,7 @@ public class ReseptinKasittelijaTest {
     @Test
     public void tiedostoonKirjoittaminenJaLukeminen() throws IOException {
     
-        kasittelija = new ReseptinKasittelija("test/testiruokalaji.txt");
+        kasittelija = new ReseptinKasittelija("testiruokalaji.txt");
         
         ruokalaji = new Ruokalaji("testiruokalaji");
         Ainekset ainekset = new Ainekset();
@@ -102,7 +103,7 @@ public class ReseptinKasittelijaTest {
     @Test
     public void reseptienLukeminenToimii() throws IOException {
         
-        kasittelija = new ReseptinKasittelija("test/testiruokalaji.txt");
+        kasittelija = new ReseptinKasittelija("testiruokalaji.txt");
         reseptit = kasittelija.lueReseptit();
         
         String luettuResepti = reseptit.get(0).toString();

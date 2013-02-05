@@ -9,12 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import reseptivarasto.Reseptikirjasto;
-import reseptivarasto.Ruokalaji;
+import reseptivarasto.domain.Reseptikirjasto;
+import reseptivarasto.domain.Ruokalaji;
 
 /**
  *
  * @author Johanna
+ * RuokalajienKasittelija luo ja lukee tiedoston, joka sisältää ruokalajien
+ * nimet. RuokalajienKasittelija antaa myös käskyn ReseptinKasittelijalle, jonka
+ * avulla myös reseptit saadaan kirjoitettua ja luettua.
  */
 public class RuokalajienKasittelija {
     
