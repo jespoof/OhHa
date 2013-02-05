@@ -9,14 +9,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import reseptivarasto.Reseptikirjasto;
-import reseptivarasto.Ruokalaji;
+import reseptivarasto.domain.Reseptikirjasto;
+import reseptivarasto.domain.Ruokalaji;
 
 /**
  *
  * @author Johanna
+ * RuokalajienKasittelija luo ja lukee tiedoston, joka sisältää ruokalajien
+ * nimet. RuokalajienKasittelija antaa myös käskyn ReseptinKasittelijalle, jonka
+ * avulla myös reseptit saadaan kirjoitettua ja luettua.
  */
-public class RuokalajinKasittelija {
+public class RuokalajienKasittelija {
     
     private Reseptikirjasto kirjasto;
     private String tiedostonNimi;
@@ -27,7 +30,7 @@ public class RuokalajinKasittelija {
 
 
 
-    public RuokalajinKasittelija(Reseptikirjasto kirjasto) throws IOException {
+    public RuokalajienKasittelija(Reseptikirjasto kirjasto) throws IOException {
         
         this.kirjasto = kirjasto;
         this.tiedostonNimi = kirjasto.getTiedostonNimi();
@@ -35,7 +38,7 @@ public class RuokalajinKasittelija {
 
     }
     
-    public RuokalajinKasittelija(String tiedostonNimi) {
+    public RuokalajienKasittelija(String tiedostonNimi) {
         
         this.tiedostonNimi = tiedostonNimi;
         this.rivit = new ArrayList<String>();
@@ -56,7 +59,7 @@ public class RuokalajinKasittelija {
             uusiTiedosto();
         }
         
-        ArrayList luettu = listaus();
+        ArrayList luettu = ruokalajienListaus();
         
         return luettu;
     }
@@ -72,7 +75,7 @@ public class RuokalajinKasittelija {
         }
     }
     
-    public ArrayList<Ruokalaji> listaus() throws IOException {
+    public ArrayList<Ruokalaji> ruokalajienListaus() throws IOException {
         
         ruokalajit = new ArrayList<Ruokalaji>();
         
@@ -85,7 +88,7 @@ public class RuokalajinKasittelija {
         return ruokalajit;
     }
     
-    public void kirjoita(ArrayList<Ruokalaji> lajit) throws IOException {
+    public void kirjoitaRuokalajit(ArrayList<Ruokalaji> lajit) throws IOException {
         rivit.clear();
         
         File tiedosto = new File(tiedostonNimi);
@@ -94,7 +97,7 @@ public class RuokalajinKasittelija {
         for (Ruokalaji laji : lajit) {
             
             kasittelija = new ReseptinKasittelija(laji);
-            kasittelija.kirjoita(laji.getReseptit());
+            kasittelija.kirjoitaReseptit(laji.getReseptit());
             kirjoittaja.write(laji.getNimi() + "\n");
         }
         
