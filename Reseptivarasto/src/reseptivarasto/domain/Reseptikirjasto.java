@@ -14,10 +14,21 @@ import java.util.ArrayList;
  * poistaa ja hakea.
  */
 public class Reseptikirjasto {
-    
+    /**
+    * Kaikki Reseptikirjaston ruokalajit
+    */
     private ArrayList<Ruokalaji> ruokalajit;
+    /**
+    * Listalle lisätään hakua vastaavat reseptit
+    */
     private ArrayList<Resepti> reseptihaku;
+    /**
+    * Kirjastoon tallennettujen ruokalajien määrä
+    */
     private int ruokalajienMaara;
+    /**
+    * Reseptikirjastotiedoston nimi on aina kirjasto.txt
+    */
     private String tiedostonNimi = "kirjasto.txt";
     
     public Reseptikirjasto() {
@@ -34,6 +45,9 @@ public class Reseptikirjasto {
         return ruokalajit;
     }
     
+    /**
+    * @return Lista, joka sisältää kaikien Ruokalajien nimet
+    */
     public ArrayList<String> getRuokalajitString() {
         ArrayList<String> ruokalaj = new ArrayList<String>();
         
@@ -48,6 +62,16 @@ public class Reseptikirjasto {
         return ruokalajit.get(laji).getResepti(resepti);
     }
     
+    /**
+    * Lisätään resepti kirjastoon
+    * 
+    * @param numero Ruokalajin numero, johon Resepti lisätään (indeksi 
+    * ArrayListissä +1)
+    * @param resepti Resepti, joka lisätään kirjastoon
+    * 
+    * @return false, jos Ruokalajia ei ole, true, jos Resepti lisättiin
+    * onnistuneesti
+    */
     public boolean lisaaResepti(int numero, Resepti resepti) {
         if (numero > ruokalajit.size() || numero < 1) {
             System.out.println("Väärä ruokalaji");
@@ -59,6 +83,11 @@ public class Reseptikirjasto {
         }
     }
     
+    /**
+    * Lisätään uusi Ruokalaji Reseptikirjastoon
+    * 
+    * @param ruokalaji Lisättävä Ruokalaji
+    */
     public void lisaaRuokalaji(Ruokalaji ruokalaji) {
         ruokalajit.add(ruokalaji);
         ruokalajienMaara++;
@@ -68,6 +97,14 @@ public class Reseptikirjasto {
         return ruokalajienMaara;
     }
     
+    /**
+    * Listataan kaikki halutun Ruokalajin reseptit
+    * 
+    * @param numero Ruokalajin numero (indeksi ArrayListissä +1)
+    * 
+    * @return "Väärä ruokalaji" jos Ruokalajia ei ole, muutoin Ruokalajin nimi
+    * sekä siihen sisältyvien Reseptien nimet
+    */
     public String listaaRuokalajinReseptit (int numero) {
         if (numero > ruokalajit.size() || numero < 1) {
             return "Väärä ruokalaji";
@@ -77,6 +114,13 @@ public class Reseptikirjasto {
         }
     }
     
+    /**
+    * Lisätään halutun Ruokalajin reseptit ArrayListiin
+    * 
+    * @param numero Halutun reseptin numero (indeksi ruokalajit-ArrayListissä)
+    * 
+    * @return ArrayList, joka sisältää kaikki Ruokalajin reseptien nimet
+    */
     public ArrayList<String> getRuokalajinReseptit (int numero) {
         ArrayList<String> reseptit = new ArrayList<String>();
         
@@ -87,6 +131,11 @@ public class Reseptikirjasto {
         return reseptit;
     }
     
+    /**
+    * Listaa kaikki Reseptikirjastossa olevat Reseptit
+    * 
+    * @return String, joka sisältää kaikki Reseptikirjaston Reseptien nimet
+    */
     public String listaaKaikkiReseptit() {
         reseptihaku = new ArrayList<Resepti>();
         String kaikki = "";
@@ -106,6 +155,15 @@ public class Reseptikirjasto {
         return kaikki;
     }
     
+    /**
+    * Haetaan Reseptiä tietystä Ruokalajista
+    * 
+    * @param numero Ruokalajin numero (indeksi+1)
+    * @param numero2 Reseptin numero (indeksi)
+    * 
+    * @return Väärä ruokalaji, jos Ruokalajia ei ole, muutoin haettu Resepti
+    * toString
+    */
     public String haeRuokalajista(int numero, int numero2) {
         if (numero > ruokalajit.size() || numero < 1) {
             return "Väärä ruokalaji";
@@ -115,6 +173,15 @@ public class Reseptikirjasto {
         }
     }
     
+    /**
+    * Poistetaan resepti
+    * 
+    * @param numero Ruokalajin numero (indeksi+1)
+    * @param numero2 Reseptin numero (indeksi)
+    * 
+    * @return false, jos Ruokalajia ei ole, false, jos Reseptiä ei ole, true
+    * jos poisto onnistui
+    */
     public boolean reseptinPoisto(int numero, int numero2) {
         if (numero > ruokalajit.size() || numero < 1) {
             System.out.println("Väärä ruokalaji");
@@ -128,6 +195,14 @@ public class Reseptikirjasto {
         }
     }
     
+    /**
+    * Haetaan Ruokalajeista Reseptejä, jossa on käyttäjän haluama Ainesosa
+    * 
+    * @param haku Käyttäjän antama hakusana
+    * 
+    * @return ArrayList, joka sisältää kaikki Reseptit, joissa on haettava
+    * Ainesosa. Jos tämä on tyhjä, palautetaan "Ei hakutuloksia"
+    */
     public String haeAinesosalla(String haku) {
         reseptihaku = new ArrayList<Resepti>();
         ArrayList<Resepti> lajihaku;
@@ -154,6 +229,14 @@ public class Reseptikirjasto {
         return haetut;
     }
     
+    /**
+    * Haetaan Reseptejä, joilla on käyttäjän haluama nimi
+    * 
+    * @param haku Käyttäjän antama hakusana
+    * 
+    * @return ArrayList, joka sisältää kaikki Reseptit, joilla on haluttu nimi
+    * Jos tyhjä, palautetaan "Ei hakutuloksia"
+    */
     public String haeNimella(String haku) {
         reseptihaku = new ArrayList<Resepti>();
         ArrayList<Resepti> lajihaku;
@@ -180,6 +263,14 @@ public class Reseptikirjasto {
         return haetut;
     }
     
+    /**
+    * Haetaan Reseptiä hakutuloksista
+    * 
+    * @param haku Reseptin numero (indeksi +1)
+    * 
+    * @return Jos Reseptiä ei ole, palautetaan Ei löydy, muutoin palautetaan
+    * haettu Resepti toString
+    */
     public String haeTuloksista(int haku) {
         
         if (haku > ruokalajit.size() || haku < 1) {
@@ -190,6 +281,9 @@ public class Reseptikirjasto {
         }
     }
     
+    /**
+    * @return Ruokalajien nimet
+    */
     @Override
     public String toString() {
         String lista = "";

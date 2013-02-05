@@ -44,6 +44,13 @@ public class Resepti implements Comparable<Resepti>{
         return ohjeet;
     }
     
+    /**
+    * Haetaan Aineksista, löytyykö hakua vastaavaa Ainesosaa
+    * 
+    * @param haku Käyttäjän antama hakusana
+    * 
+    * @return true, jos löytyy, false jos ei löydy
+    */
     public boolean onkoAinesta(String haku) {
         
         if (ainekset.onkoAinesta(haku) == true) {
@@ -53,6 +60,13 @@ public class Resepti implements Comparable<Resepti>{
         return false;
     }
     
+    /**
+    * Katsotaan vastaako reseptin nimi hakusanaa
+    * 
+    * @param haku Käyttäjän antama hakusana
+    * 
+    * @return true, jos Reseptin nimi on sama kuin hakusana, false jos ei
+    */
     public boolean onkoNimi(String haku) {
         
         if (this.nimi.equals(haku)) {
@@ -62,18 +76,25 @@ public class Resepti implements Comparable<Resepti>{
         return false;
     }
     
-
+    /**
+    * @return Reseptin nimi, ainesosat ja ohjeet String-muodossa
+    */
     @Override
     public String toString() {
         
         return this.nimi + "\n" + "\n" + "Ainekset:" + "\n" + ainekset.toString() + "\n" + "Valmistusohjeet:" + "\n" + ohjeet;
     }
     
-    
+    /**
+    * Ainesten tiedostoon kirjoittamista varten
+    */
     public String tiedostoon() {
         return ainekset.tiedostoon();
     }
-
+    
+    /**
+    * Reseptien järjestäminen aakkosjärjestykseen
+    */
     @Override
     public int compareTo(Resepti resepti) {
         return this.nimi.compareToIgnoreCase(resepti.getNimi());

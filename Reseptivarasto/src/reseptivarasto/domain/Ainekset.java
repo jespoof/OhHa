@@ -13,8 +13,13 @@ import java.util.ArrayList;
  * voidaan myös lisätä ja hakea tästä.
  */
 public class Ainekset {
-    
+    /**
+    * ArrayList, joka sisältää Ainesosat
+    */
     private ArrayList<Ainesosa> aines;
+    /**
+    * ArrayList, joka sisältää String-versiot Ainesosista
+    */
     private ArrayList<String> lista;
     
     public Ainekset () {
@@ -24,18 +29,27 @@ public class Ainekset {
         
     }
     
-    
     public ArrayList<Ainesosa> getAinekset() {
         return aines;
     }
-    
+ 
+    /**
+    * Lisää Ainesosan aines-ArrayListiin ja sen toString-muodon 
+    * lista-ArrayListiin
+    */
     public void lisaaAines(Ainesosa ainesosa) {
         
         this.aines.add(ainesosa);
         this.lista.add(ainesosa.toString());
     }
     
-    
+    /**
+    * Haetaan Ainesosien nimistä, löytyykö käyttäjän hakemaa ainesosaa
+    * 
+    * @param haku Käyttäjän antama hakusana
+    * 
+    * @return true, jos löytyy hakua vastaava Ainesosa, false jos ei löydy
+    */
     public boolean onkoAinesta (String haku) {
         
         for (Ainesosa ainesosa : aines) {
@@ -48,7 +62,9 @@ public class Ainekset {
         return false;
     }
     
-    
+    /**
+    * @return lisätyt Ainesosat String-muodossa
+    */
     @Override
     public String toString() {
         
@@ -61,6 +77,9 @@ public class Ainekset {
         return ainekset;
     }
     
+    /**
+    * Tiedoston kirjoittamista varten
+    */
     public String tiedostoon() {
         String tiedosto = "";
         
