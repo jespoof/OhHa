@@ -109,7 +109,7 @@ public class Tekstikayttoliittyma {
                     System.out.println("Kirjoita valmistusohjeet:");
                     String ohjeet = lukija.nextLine();
                     
-                    kirjasto.lisaaResepti(laji, new Resepti(nimi, ainekset, ohjeet));
+                    kirjasto.lisaaResepti(laji-1, new Resepti(nimi, ainekset, ohjeet));
                     
                     System.out.println("");
                 }
@@ -125,7 +125,7 @@ public class Tekstikayttoliittyma {
                     String varmistus = lukija.nextLine();
                     
                     if (varmistus.equals("K")) {
-                        kirjasto.reseptinPoisto(laji, poisto);
+                        kirjasto.reseptinPoisto(laji-1, poisto-1);
                     } else if (varmistus.equals("E")) {
                     }
                 
@@ -142,7 +142,7 @@ public class Tekstikayttoliittyma {
                     System.out.println("");
                     System.out.println("---");
                         
-                    System.out.println(kirjasto.haeRuokalajista(num, num2));
+                    System.out.println(kirjasto.haeRuokalajista(num-1, num2-1));
             
                     System.out.println("---");
                     System.out.println("");
@@ -183,10 +183,10 @@ public class Tekstikayttoliittyma {
                     
                     System.out.println("");
                     
-                    if (kirjasto.haeNimella(nimihaku).equals("Ei hakutuloksia")) {
-                        System.out.println(kirjasto.haeNimella(nimihaku));
+                    if (kirjasto.haeNimellaString(nimihaku).equals("Ei hakutuloksia")) {
+                        System.out.println(kirjasto.haeNimellaString(nimihaku));
                     }else {
-                        System.out.println(kirjasto.haeNimella(nimihaku));
+                        System.out.println(kirjasto.haeNimellaString(nimihaku));
                         mikaHakutuloksista();
                     }
                     
@@ -203,10 +203,10 @@ public class Tekstikayttoliittyma {
                     
                     System.out.println("");
                     
-                    if (kirjasto.haeAinesosalla(aineshaku).equals("Ei hakutuloksia")) {
-                        System.out.println(kirjasto.haeAinesosalla(aineshaku));
+                    if (kirjasto.haeAinesosallaString(aineshaku).equals("Ei hakutuloksia")) {
+                        System.out.println(kirjasto.haeAinesosallaString(aineshaku));
                     }else {
-                        System.out.println(kirjasto.haeAinesosalla(aineshaku));
+                        System.out.println(kirjasto.haeAinesosallaString(aineshaku));
                         mikaHakutuloksista();
                     }
                 }
@@ -244,7 +244,7 @@ public class Tekstikayttoliittyma {
         
         while (true) {
                         
-            System.out.println(kirjasto.listaaRuokalajinReseptit(num));
+            System.out.println(kirjasto.listaaRuokalajinReseptit(num-1));
             System.out.println("");
                         
             int num2 = 0;
@@ -307,7 +307,7 @@ public class Tekstikayttoliittyma {
         System.out.println("---");
         
         try {
-        System.out.println(kirjasto.haeTuloksista(haku));
+        System.out.println(kirjasto.haeTuloksista(haku-1));
         } catch (Exception e) {
         System.out.println("Reseptiä ei löydy.");
         }

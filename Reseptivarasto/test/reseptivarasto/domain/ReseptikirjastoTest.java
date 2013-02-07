@@ -171,7 +171,7 @@ public class ReseptikirjastoTest {
         kirjasto.lisaaRuokalaji(ruokalaji1);
         kirjasto.lisaaResepti(1, resepti1);
         
-        String reseptit = kirjasto.haeAinesosalla("jauho");
+        String reseptit = kirjasto.haeAinesosallaString("jauho");
         
         assertEquals("Pahaa ruokaa\n1 Jauhosokeri\n\n", reseptit);
     
@@ -183,7 +183,7 @@ public class ReseptikirjastoTest {
         kirjasto.lisaaRuokalaji(ruokalaji1);
         kirjasto.lisaaResepti(1, resepti1);
         
-        String reseptit = kirjasto.haeNimella("Jauhosokeri");
+        String reseptit = kirjasto.haeNimellaString("Jauhosokeri");
         
         assertEquals("Pahaa ruokaa\n1 Jauhosokeri\n\n", reseptit);
     

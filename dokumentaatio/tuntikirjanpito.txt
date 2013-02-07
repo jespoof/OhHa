@@ -17,4 +17,5 @@ päivä	aika	kohde
 2.2 	3 h 	Graafista käyttöliittymää
 3.2	5 h	Graafista käyttöliittymää
 4.2	5 h	Graafista käyttöliittymää, sekvenssikaavioita, JavaDocin aloittaminen
-5.2	1.5 h	JavaDocin kirjoittamista
+5.2	5 h	JavaDocin kirjoittamista, Graafista käyttöliittymää
+6.2	2 h	JavaDocia, sekvenssikaavio

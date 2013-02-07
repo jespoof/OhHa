@@ -56,25 +56,25 @@ public class Ruokalaji {
     /**
     * Haetaan resepti
     * 
-    * @param numero Reseptin numero (indeksi ArrayListissä +1)
+    * @param numero Reseptin numero (indeksi reseptit-ArrayListissä)
     *
     * @return Jos numerolla ei löydy reseptiä, palautetaan "Ei reseptiä",
     * muutoin palautetaan valittu Resepti toString
     */
     public String haeResepti(int numero) {
         
-        if (numero > reseptit.size() || numero < 1) {
+        if (numero+1 > reseptit.size() || numero+1 < 1) {
             return "Ei reseptiä";
         
         }else {
-            return reseptit.get(numero-1).toString();
+            return reseptit.get(numero).toString();
         }
     }
     
     /**
     * Poistetaan resepti
     * 
-    * @param numero Reseptin numero (indeksi ArrayListissä +1)
+    * @param numero Reseptin numero (indeksi reseptit-ArrayListissä)
     * 
     * @return "Ei reseptiä" jos numerolla ei löydy reseptiä, muutoin poistetaan
     * kyseessä oleva Resepti
@@ -82,12 +82,12 @@ public class Ruokalaji {
     */
     public boolean poistaResepti(int numero) {
         
-        if (numero > reseptit.size() || numero < 1) {
+        if (numero+1 > reseptit.size() || numero+1 < 1) {
             System.out.println("Ei reseptiä");
             return false;
         
         }else {
-            reseptit.remove(numero-1);
+            reseptit.remove(numero);
             return true;
         }
     }

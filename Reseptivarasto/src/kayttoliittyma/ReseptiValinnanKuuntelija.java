@@ -41,30 +41,34 @@ public class ReseptiValinnanKuuntelija implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         JComboBox cb = (JComboBox)ae.getSource();
-        int reseptiNumero = cb.getSelectedIndex();
+        int reseptiNumero = cb.getSelectedIndex()-1;
         
-        Resepti resepti = kirjasto.getResepti(laji.getSelectedIndex()-1, reseptiNumero);
+        if (reseptiNumero > -1) {
+            Resepti resepti = kirjasto.getResepti(laji.getSelectedIndex()-1, reseptiNumero);
         
-        nimi.setText(resepti.getNimi());
-        ArrayList<Ainesosa> ainesosat1  = resepti.getAineksetLista();
+            nimi.setText(resepti.getNimi());
+            ArrayList<Ainesosa> ainesosat1  = resepti.getAineksetLista();
         
-        ainesosat.clear();
+            ainesosat.clear();
         
-        for (Ainesosa osa : ainesosat1) {
-            ainesosat.add(osa);
+            for (Ainesosa osa : ainesosat1) {
+                ainesosat.add(osa);
+            }
+        
+            ArrayList<String> osat = new ArrayList<String>();
+            
+            for (Ainesosa osa : ainesosat1) {
+                osat.add(osa.toString());
+            }
+                   
+            String [] lista = new String[osat.size()];
+            lista = osat.toArray(lista);
+            aineslista.setListData(lista);
+        
+            ohjeet.setText(resepti.getOhjeet());
         }
         
-        ArrayList<String> osat = new ArrayList<String>();
-            
-                for (Ainesosa osa : ainesosat1) {
-                    osat.add(osa.toString());
-                }
-            
-                String [] lista = new String[osat.size()];
-                lista = osat.toArray(lista);
-                aineslista.setListData(lista);
         
-        ohjeet.setText(resepti.getOhjeet());
     }
     
 }

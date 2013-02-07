@@ -26,7 +26,7 @@ public class RuokalajienKasittelija {
     private ArrayList<String> rivit;
     private ArrayList<Ruokalaji> ruokalajit;
     
-    ReseptinKasittelija kasittelija;
+    private ReseptinKasittelija kasittelija;
 
 
 
@@ -45,6 +45,9 @@ public class RuokalajienKasittelija {
         
     }
     
+    /**
+    * Lukee Ruokalajit tiedostosta ja laitetaan ne ArrayListiin
+    */
     public ArrayList<Ruokalaji> lueRuokalajit() throws IOException {
         
         File tiedosto = new File(tiedostonNimi);
@@ -64,6 +67,9 @@ public class RuokalajienKasittelija {
         return luettu;
     }
     
+    /**
+    * Luo uuden tiedoston jos tiedostoa ei ole
+    */
     public void uusiTiedosto() throws IOException {
         FileWriter kirjoittaja = null;
         
@@ -75,6 +81,10 @@ public class RuokalajienKasittelija {
         }
     }
     
+    /**
+    * Lukee tiedoston Ruokalajit ArrayListille ja käskee RuokalajienKäsittelijän 
+    * lukemaan niiden Reseptit
+    */
     public ArrayList<Ruokalaji> ruokalajienListaus() throws IOException {
         
         ruokalajit = new ArrayList<Ruokalaji>();
@@ -88,6 +98,10 @@ public class RuokalajienKasittelija {
         return ruokalajit;
     }
     
+    /**
+    * Kirjoittaa Ruokalajien nimet tiedostoon ja käskee ReseptienKäsittelijän
+    * kirjoittamaan Reseptit
+    */
     public void kirjoitaRuokalajit(ArrayList<Ruokalaji> lajit) throws IOException {
         rivit.clear();
         

@@ -23,23 +23,26 @@ import reseptivarasto.domain.Ruokalaji;
 public class ReseptinKasittelija {
     private Ruokalaji ruokalaji;
     private String tiedostonNimi;
-    private String rivit;
+    private String reseptitS;
 
     public ReseptinKasittelija(Ruokalaji ruokalaji) throws IOException {
         
         this.ruokalaji = ruokalaji;
         this.tiedostonNimi = ruokalaji.getNimi()+".txt";
-        this.rivit = new String();
+        this.reseptitS = new String();
 
     }
     
     public ReseptinKasittelija(String tiedostonNimi) {
         
         this.tiedostonNimi = tiedostonNimi;
-        this.rivit = new String();
+        this.reseptitS = new String();
         
     }
     
+    /**
+    * Lukee Reseptit tiedostosta
+    */
     public ArrayList<Resepti> lueReseptit() throws IOException {
         
         File tiedosto = new File(tiedostonNimi);
@@ -47,7 +50,7 @@ public class ReseptinKasittelija {
         try {
             Scanner lukija = new Scanner(tiedosto, "UTF-8");
             while (lukija.hasNextLine()) {
-                rivit += lukija.nextLine();
+                reseptitS += lukija.nextLine();
             }
             lukija.close();
         } catch (Exception eiTiedostoa) {
@@ -59,6 +62,9 @@ public class ReseptinKasittelija {
         return luettu;
     }
     
+    /**
+    * Luo uuden tiedoston jos tiedostoa ei ole
+    */
     public void uusiTiedosto() throws IOException {
         FileWriter kirjoittaja = null;
         
@@ -71,9 +77,12 @@ public class ReseptinKasittelija {
         }
     }
     
+    /**
+    * Jakaa tiedostot Resepteihin
+    */
     public ArrayList<Resepti> listaaReseptit() throws IOException {
         
-        String res[] = rivit.split("///=");
+        String res[] = reseptitS.split("///=");
         ArrayList<Resepti> reseptit = new ArrayList<Resepti>();
         
         for (String s : res) {
@@ -86,6 +95,10 @@ public class ReseptinKasittelija {
         return reseptit;
     }
     
+    /**
+    * Erottaa Reseptin osat, eli nimen, ainekset ja ohjeet, ja luo niistä
+    * Reseptin
+    */
     public Resepti luoResepti(String lue) {
         String r[] = lue.split("&!");
         
@@ -101,19 +114,25 @@ public class ReseptinKasittelija {
         
     }
     
+    /**
+    * Erottaa Reseptin Aineosat
+    */
     public Ainekset kasitteleAinekset (String ainekset1){
         
         String r[] = ainekset1.split("#/");
         Ainekset a = new Ainekset();
         
         for (String s : r) {
-            a.lisaaAines(kasitteleAinesosat(s));
+            a.lisaaAines(luoAinesosa(s));
         }
         
         return a;
     }
     
-    public Ainesosa kasitteleAinesosat(String aines) {
+    /**
+    * Luo Ainesosan
+    */
+    public Ainesosa luoAinesosa(String aines) {
         
         String a[] = aines.split("%@");
         
@@ -125,8 +144,11 @@ public class ReseptinKasittelija {
         return osa;
     }
     
+    /**
+    * Kirjoittaa Reseptit tiedostoon ja lisää erotuskohtamerkit
+    */
     public void kirjoitaReseptit(ArrayList<Resepti> reseptit) throws IOException{
-        rivit = "";
+        reseptitS = "";
         
         File tiedosto = new File(tiedostonNimi);
         FileWriter kirjoittaja = new FileWriter(tiedosto);

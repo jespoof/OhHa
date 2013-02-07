@@ -34,18 +34,22 @@ public class RuokalajinKuuntelija implements ActionListener{
             
             String r[] = new String[0];
             reseptinValitsin.setModel(new JComboBox(r).getModel());
+            lisaaViivat();
         
         } else {
             
             String r[] = new String[kirjasto.getRuokalajinReseptit(luku).size()];
             r = kirjasto.getRuokalajinReseptit(luku).toArray(r);
             reseptinValitsin.setModel(new JComboBox(r).getModel());
-        
-            if (r.length > 1) {
-                reseptinValitsin.setSelectedIndex(0);
-            }
+            lisaaViivat();
+            
         }
         
+    }
+    
+    private void lisaaViivat() {
+        reseptinValitsin.insertItemAt("---", 0);
+        reseptinValitsin.setSelectedIndex(0);
     }
     
     
