@@ -40,6 +40,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
     
     private ArrayList<Ainesosa> ainesosat;
     private JList aineslista;
+    private JList aineslista2;
     
     private ArrayList<Resepti> haku;
     
@@ -56,7 +57,6 @@ public class GraafinenKayttoliittyma implements ActionListener {
         ruokalajikasittelija = new RuokalajienKasittelija("kirjasto.txt");
         kirjasto = new Reseptikirjasto(ruokalajikasittelija.lueRuokalajit());
         ainesosat = new ArrayList<Ainesosa>();
-        haku = new ArrayList<Resepti>();
         
     }
     
@@ -139,7 +139,10 @@ public class GraafinenKayttoliittyma implements ActionListener {
         lajiP.add(lajiL);
         lajiP.add(lajiValinta);
         
-        JPanel aineksetP = ainekset();
+        aineslista = new JList(new String[0]);
+        aineslista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        JPanel aineksetP = ainekset(aineslista);
         
         vasen.add(nimiP);
         vasen.add(lajiP);
@@ -219,7 +222,10 @@ public class GraafinenKayttoliittyma implements ActionListener {
         nimiP.add(nimiL);
         nimiP.add(nimiT);
         
-        JPanel aineksetP = ainekset();
+        aineslista2 = new JList(new String[0]);
+        aineslista2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        JPanel aineksetP = ainekset(aineslista2);
         
         vasen.add(nimiP);
         vasen.add(aineksetP);
@@ -229,7 +235,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         ala.add(vasen);
         ala.add(oikea);
         
-        reseptiValinta.addActionListener(new ReseptiValinnanKuuntelija(lajiValinta, nimiT, ainesosat, aineslista, ohjeetA, kirjasto));
+        reseptiValinta.addActionListener(new ReseptiValinnanKuuntelija(lajiValinta, nimiT, ainesosat, aineslista2, ohjeetA, kirjasto));
         
         JPanel ilmoitin = ilmoitin();
         
@@ -237,11 +243,11 @@ public class GraafinenKayttoliittyma implements ActionListener {
         vaih.setLayout(new FlowLayout());
         
         JButton tallennaB = new JButton("Tallenna ");
-        tallennaB.addActionListener(new ReseptinKuuntelija(lajiValinta, reseptiValinta, nimiT, ainesosat, ohjeetA, kirjasto, aineslista, ruokalajikasittelija, ilmoitus));
+        tallennaB.addActionListener(new ReseptinKuuntelija(lajiValinta, reseptiValinta, nimiT, ainesosat, ohjeetA, kirjasto, aineslista2, ruokalajikasittelija, ilmoitus));
         JButton peruB = new JButton("Peruuta");
-        peruB.addActionListener(new ReseptinKuuntelija(lajiValinta, reseptiValinta, nimiT, ainesosat, ohjeetA, kirjasto, aineslista, ruokalajikasittelija, ilmoitus));
+        peruB.addActionListener(new ReseptinKuuntelija(lajiValinta, reseptiValinta, nimiT, ainesosat, ohjeetA, kirjasto, aineslista2, ruokalajikasittelija, ilmoitus));
         JButton poistaB = new JButton("Poista resepti");
-        poistaB.addActionListener(new ReseptinKuuntelija(lajiValinta, reseptiValinta, nimiT, ainesosat, ohjeetA, kirjasto, aineslista, ruokalajikasittelija, ilmoitus));
+        poistaB.addActionListener(new ReseptinKuuntelija(lajiValinta, reseptiValinta, nimiT, ainesosat, ohjeetA, kirjasto, aineslista2, ruokalajikasittelija, ilmoitus));
         
         vaih.add(tallennaB);
         vaih.add(peruB);
@@ -383,7 +389,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return ilmoitin;
     }
 
-    private JPanel ainekset() {
+    private JPanel ainekset(JList lista) {
         
         JPanel paneeli = new JPanel();
         paneeli.setLayout(new BoxLayout(paneeli, BoxLayout.Y_AXIS));
@@ -403,20 +409,17 @@ public class GraafinenKayttoliittyma implements ActionListener {
         
         JPanel aineksetP = new JPanel();
         aineksetP.setLayout(new BoxLayout(aineksetP, BoxLayout.Y_AXIS));
-        String[] ain = {};
         
-        aineslista = new JList(ain);
-        aineslista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane scroll = new JScrollPane(aineslista);
+        JScrollPane scroll = new JScrollPane(lista);
         scroll.setPreferredSize(new Dimension(100,100));
         
-        lisaaAB.addActionListener(new AineksenKuuntelija(nimi,maara,ainesosat,aineslista));
+        lisaaAB.addActionListener(new AineksenKuuntelija(nimi,maara,ainesosat,lista));
         
         aineksetP.add(scroll);
         
         JPanel lisaaC = new JPanel();
         JButton poistaAB = new JButton("Poista");
-        poistaAB.addActionListener(new AineksenKuuntelija(ainesosat,aineslista));
+        poistaAB.addActionListener(new AineksenKuuntelija(ainesosat,lista));
         
         lisaaC.add(poistaAB);
         
@@ -494,6 +497,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
     
     private void tyhjennys() {
         aineslista.setListData(new String[0]);
+        aineslista2.setListData(new String[0]);
         ainesosat.clear();
         nimiT.setText("");
         ohjeetA.setText("");
