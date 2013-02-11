@@ -27,6 +27,7 @@ public class ReseptiValinnanKuuntelija implements ActionListener{
     private ArrayList<Ainesosa> ainesosat;
     private JList aineslista;
     private JTextArea ohjeet;
+    private ArrayList<Ainesosa> ainesosat1;
     private Reseptikirjasto kirjasto;
     
     public ReseptiValinnanKuuntelija(JComboBox laji, JTextField nimi, ArrayList<Ainesosa> ainesosat, JList aineslista, JTextArea ohjeet, Reseptikirjasto kirjasto) {
@@ -36,6 +37,7 @@ public class ReseptiValinnanKuuntelija implements ActionListener{
         this.aineslista = aineslista;
         this.ohjeet = ohjeet;
         this.kirjasto = kirjasto;
+        ainesosat1 = new ArrayList<Ainesosa>();
     }
 
     @Override
@@ -45,30 +47,28 @@ public class ReseptiValinnanKuuntelija implements ActionListener{
         
         if (reseptiNumero > -1) {
             Resepti resepti = kirjasto.getResepti(laji.getSelectedIndex()-1, reseptiNumero);
-        
             nimi.setText(resepti.getNimi());
-            ArrayList<Ainesosa> ainesosat1  = resepti.getAineksetLista();
-        
+            ainesosat1  = resepti.getAineksetLista();
             ainesosat.clear();
         
             for (Ainesosa osa : ainesosat1) {
                 ainesosat.add(osa);
             }
         
-            ArrayList<String> osat = new ArrayList<String>();
-            
-            for (Ainesosa osa : ainesosat1) {
-                osat.add(osa.toString());
-            }
-                   
-            String [] lista = new String[osat.size()];
-            lista = osat.toArray(lista);
-            aineslista.setListData(lista);
-        
+            ainesosatStringille();
             ohjeet.setText(resepti.getOhjeet());
         }
-        
-        
     }
-    
+        
+    public void ainesosatStringille() {
+        ArrayList<String> osat = new ArrayList<String>();
+            
+        for (Ainesosa osa : ainesosat1) {
+            osat.add(osa.toString());
+        }
+                   
+        String [] lista = new String[osat.size()];
+        lista = osat.toArray(lista);
+        aineslista.setListData(lista);
+    }
 }

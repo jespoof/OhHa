@@ -43,41 +43,39 @@ public class AineksenKuuntelija implements ActionListener{
         String napinNimi = ((JButton)ae.getSource()).getText();
         
         if (napinNimi.equals("Lisää")) {
-            
-            if(!nimi.getText().isEmpty() && !maara.getText().isEmpty()) {
+            lisaa();
+        } if (napinNimi.equals("Poista")) {
+            poista();
+        }
+    }
+    
+    public void lisaa() {
+        if(!nimi.getText().isEmpty() && !maara.getText().isEmpty()) {
                 ainesosat.add(new Ainesosa(nimi.getText(),maara.getText()));
-                ArrayList<String> osat = new ArrayList<String>();
-            
-                for (Ainesosa osa : ainesosat) {
-                    osat.add(osa.toString());
-                }
-            
-                ainesLista = new String[osat.size()];
-                ainesLista = osat.toArray(ainesLista);
-                lista.setListData(ainesLista);
+                listaaAinekset();
                 nimi.setText("Ainesosa");
                 maara.setText("Määrä");
-                
             }
-        }
-        
-        if (napinNimi.equals("Poista")) {
-            int poistettava = lista.getSelectedIndex();
+    }
+    
+    public void poista() {
+        int poistettava = lista.getSelectedIndex();
             
             if (!ainesosat.isEmpty() && poistettava > -1) {
                 ainesosat.remove(poistettava);
-                ArrayList<String> osat = new ArrayList<String>();
-            
-                for (Ainesosa osa : ainesosat) {
-                    osat.add(osa.toString());
-                }
-            
-                ainesLista = new String[osat.size()];
-                ainesLista = osat.toArray(ainesLista);
-                lista.setListData(ainesLista);
+                listaaAinekset();
             }
+    }
+    
+    public void listaaAinekset() {
+        ArrayList<String> osat = new ArrayList<String>();
             
+        for (Ainesosa osa : ainesosat) {
+            osat.add(osa.toString());
         }
-        
+            
+        ainesLista = new String[osat.size()];
+        ainesLista = osat.toArray(ainesLista);
+        lista.setListData(ainesLista);
     }
 }

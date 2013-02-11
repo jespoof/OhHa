@@ -69,7 +69,7 @@ public class Resepti implements Comparable<Resepti>{
     */
     public boolean onkoNimi(String haku) {
         
-        if (this.nimi.equals(haku)) {
+        if (this.nimi.toLowerCase().contains(haku.toLowerCase())) {
             return true;
         }
         

@@ -72,41 +72,15 @@ public class ReseptinKuuntelija implements ActionListener{
         String napinNimi = ((JButton)ae.getSource()).getText();
         
         if (napinNimi.equals("Tallenna")) {
-            
             tallennus();
-        }
-        if (napinNimi.equals("Tallenna ")) {
-            
+        } if (napinNimi.equals("Tallenna ")) {
             kirjasto.reseptinPoisto(laji.getSelectedIndex()-1, reseptiC.getSelectedIndex()-1);
             tallennus();
             reseptiC.setSelectedIndex(0);
-        }
-        if (napinNimi.equals("Peruuta")) {
+        } if (napinNimi.equals("Peruuta")) {
             tyhjennys();
-        }
-        if (napinNimi.equals("Poista resepti")) {
-            
-            if (laji.getSelectedIndex() != 0 && reseptiC.getSelectedIndex() !=0) {
-                kirjasto.reseptinPoisto(laji.getSelectedIndex()-1, reseptiC.getSelectedIndex()-1);
-            
-                String r[] = new String[kirjasto.getRuokalajinReseptit(laji.getSelectedIndex()-1).size()];
-                r = kirjasto.getRuokalajinReseptit(laji.getSelectedIndex()-1).toArray(r);
-                reseptiC.setModel(new JComboBox(r).getModel());
-                reseptiC.insertItemAt("---", 0);
-                reseptiC.setSelectedIndex(0);
-            
-                try {
-                    ruokalajikasittelija.kirjoitaRuokalajit(kirjasto.getRuokalajit());
-                    } catch (IOException ex) {
-                        Logger.getLogger(ReseptinKuuntelija.class.getName()).log(Level.SEVERE, null, ex);
-                       ilmoitus.setText("Reseptin poistaminen epäonnistui");
-                }
-                
-                tyhjennys();
-                ilmoitus.setText("Resepti poistettu");
-            } else {
-            ilmoitus.setText("Olet tehnyt vääriä valintoja");
-            }
+        } if (napinNimi.equals("Poista resepti")) {
+            poisto();
         }
     }
     
@@ -121,29 +95,54 @@ public class ReseptinKuuntelija implements ActionListener{
     
     public void tallennus() {
         
-        if (laji.getSelectedIndex()!=0 && !ainesosat.isEmpty() && !nimi.getText().isEmpty() && !ohjeet.getText().isEmpty()) {
-                    for (Ainesosa ainesosa : ainesosat) {
-                    ainekset.lisaaAines(ainesosa);
-                }
+        if (laji.getSelectedIndex()!=0 && !ainesosat.isEmpty() && !nimi.getText().isEmpty() && !ohjeet.getText().isEmpty() && onkoSamannimisia() == false) {
+            for (Ainesosa ainesosa : ainesosat) {
+                ainekset.lisaaAines(ainesosa);
+            }
         
-                    String nimiS = nimi.getText();
-                    String ohjeetS = ohjeet.getText();
-                    int lajiI = laji.getSelectedIndex()-1;
-        
-                    kirjasto.lisaaResepti(lajiI, new Resepti (nimiS, ainekset, ohjeetS));
-                
-                    try {
-                        ruokalajikasittelija.kirjoitaRuokalajit(kirjasto.getRuokalajit());
-                    } catch (IOException ex) {
-                        Logger.getLogger(ReseptinKuuntelija.class.getName()).log(Level.SEVERE, null, ex);
-                        ilmoitus.setText("Reseptin tallentaminen epäonnistui");
-                    }
-                
-                    tyhjennys();
-                    ilmoitus.setText("Resepti " + nimiS + " tallennettu");
+            String nimiS = nimi.getText();
+            String ohjeetS = ohjeet.getText();
+            int lajiI = laji.getSelectedIndex()-1;
+            kirjasto.lisaaResepti(lajiI, new Resepti (nimiS, ainekset, ohjeetS));
+            tiedostoonKirjoittaminen("Reseptin tallentaminen epäonnistui");
+            tyhjennys();
+            ilmoitus.setText("Resepti " + nimiS + " tallennettu");
         } else {
             ilmoitus.setText("Olet tehnyt vääriä valintoja");
         }
     }
     
+    public void poisto() {
+        if (laji.getSelectedIndex() != 0 && reseptiC.getSelectedIndex() !=0) {
+            kirjasto.reseptinPoisto(laji.getSelectedIndex()-1, reseptiC.getSelectedIndex()-1);
+            String r[] = new String[kirjasto.getRuokalajinReseptit(laji.getSelectedIndex()-1).size()];
+            r = kirjasto.getRuokalajinReseptit(laji.getSelectedIndex()-1).toArray(r);
+            reseptiC.setModel(new JComboBox(r).getModel());
+            reseptiC.insertItemAt("---", 0);
+            reseptiC.setSelectedIndex(0);
+            tiedostoonKirjoittaminen("Reseptin poistaminen epäonnistui");
+            tyhjennys();
+            ilmoitus.setText("Resepti poistettu");
+        } else {
+            ilmoitus.setText("Olet tehnyt vääriä valintoja");
+        }
+    }
+    
+    public boolean onkoSamannimisia() {
+        for (String n : kirjasto.getRuokalajinReseptit(laji.getSelectedIndex()-1)) {
+            if (n.equals(nimi.getText())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void tiedostoonKirjoittaminen(String ilm) {
+        try {
+            ruokalajikasittelija.kirjoitaRuokalajit(kirjasto.getRuokalajit());
+        } catch (IOException ex) {
+            Logger.getLogger(ReseptinKuuntelija.class.getName()).log(Level.SEVERE, null, ex);
+            ilmoitus.setText(ilm);
+        }
+    }
 }

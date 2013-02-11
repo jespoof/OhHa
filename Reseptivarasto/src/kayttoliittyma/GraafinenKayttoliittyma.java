@@ -41,8 +41,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
     private ArrayList<Ainesosa> ainesosat;
     private JList aineslista;
     private JList aineslista2;
-    
-    private ArrayList<Resepti> haku;
+    private JList hakutulos;
     
     private JTextField nimiT;
     private JTextArea ohjeetA;
@@ -50,6 +49,8 @@ public class GraafinenKayttoliittyma implements ActionListener {
     private JComboBox reseptiValinta;
     private JLabel ilmoitus;
     private JTextArea reseptiA;
+    private JTextArea reseptitulos;
+    private JTextField hakukentta;
     
     
     public GraafinenKayttoliittyma() throws IOException {
@@ -129,7 +130,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JPanel nimiP = new JPanel();
         JLabel nimiL = new JLabel("Reseptin nimi:");
         nimiT = new JTextField();
-        nimiT.setPreferredSize(new Dimension(169,23));
+        nimiT.setPreferredSize(new Dimension(169,20));
         nimiP.add(nimiL);
         nimiP.add(nimiT);
         
@@ -218,7 +219,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JPanel nimiP = new JPanel();
         JLabel nimiL = new JLabel("Reseptin nimi:");
         nimiT = new JTextField();
-        nimiT.setPreferredSize(new Dimension(169,23));
+        nimiT.setPreferredSize(new Dimension(169,20));
         nimiP.add(nimiL);
         nimiP.add(nimiT);
         
@@ -309,55 +310,64 @@ public class GraafinenKayttoliittyma implements ActionListener {
         paneeli.setLayout(new BoxLayout(paneeli, BoxLayout.Y_AXIS));
         
         JPanel alusta = new JPanel();
-        JPanel paa = paaPaneelinLuominen("Hae reseptiä");
+        JPanel paa = paaPaneelinLuominen("Reseptihaku");
         
         JPanel yla = new JPanel();
-        yla.setLayout(new BoxLayout(yla, BoxLayout.Y_AXIS));
+        yla.setLayout(new GridLayout(2,1));
         
-        JPanel haut = new JPanel();
-        haut.setLayout(new GridLayout(3,3));
-        haut.setBorder(BorderFactory.createEmptyBorder(5, 25, 0, 25));
+        JPanel hakuP = new JPanel();
+        hakuP.setLayout(new FlowLayout());
+        hakuP.setBorder(BorderFactory.createEmptyBorder(5, 25, 0, 25));
         
-        JPanel nimiHP = new JPanel();
-        JLabel nimiHL = new JLabel("Hae reseptin nimellä:");
-        JTextField nimiH = new JTextField();
-        JPanel nappi1 = new JPanel();
-        JButton haeNimi = new JButton("Hae");
-        nappi1.add(haeNimi);
         
-        haut.add(nimiHL);
-        haut.add(nimiH);
-        haut.add(nappi1);
+        JComboBox nimiVaiAines = new JComboBox();
+        nimiVaiAines.addItem("Hae reseptiä nimen mukaan");
+        nimiVaiAines.addItem("Hae reseptiä ainesosan mukaan");
         
-        JPanel ainesHP = new JPanel();
-        JLabel ainesHL = new JLabel("Hae ainesosalla:");
-        JTextField ainesH = new JTextField();
-        JPanel nappi2 = new JPanel();
-        JButton haeAines = new JButton("Hae ");
-        nappi2.add(haeAines);
+        hakuP.add(nimiVaiAines);
         
-        haut.add(ainesHL);
-        haut.add(ainesH);
-        haut.add(nappi2);
+        hakukentta = new JTextField();
+        hakukentta.setPreferredSize((new Dimension(170,20)));
+        JPanel ha = new JPanel();
+        JButton hakunappi = new JButton("Hae");
+        ha.add(hakukentta);
+        ha.add(hakunappi);
         
-        JLabel reseptiValintaL = new JLabel("");
-        reseptiValinta = lajinReseptit();
-        haut.add(reseptiValintaL);
-        haut.add(reseptiValinta);
         
-        JPanel ala = reseptiAlus();
+        JPanel ala = new JPanel();
+        ala.setLayout(new FlowLayout());
+        reseptitulos = new JTextArea();
+        reseptitulos.setLineWrap(true);
+        reseptitulos.setWrapStyleWord(true);
+        reseptitulos.setEditable(false);
         
-        yla.add(haut);
+        JPanel tulosP = new JPanel();
+        tulosP.setLayout(new BoxLayout(tulosP, BoxLayout.Y_AXIS));
+        hakutulos = new JList(new String[0]);
+        JScrollPane tulos = new JScrollPane(hakutulos);
+        tulos.setPreferredSize(new Dimension(140,275));
+        JButton valitse = new JButton("Valitse");
+        tulosP.add(tulos);
+        tulosP.add(valitse);
+        
+        JScrollPane reseptiAlus = new JScrollPane(reseptitulos);
+        reseptiAlus.setPreferredSize(new Dimension(388,300));
+        
+        hakunappi.addActionListener(new HakusananKuuntelija(nimiVaiAines, hakukentta, hakutulos, kirjasto));
+        valitse.addActionListener(new HaunKuuntelija(nimiVaiAines, hakukentta, hakutulos, reseptitulos, kirjasto));
+        
+        ala.add(tulosP);
+        ala.add(reseptiAlus);
+        
+        yla.add(hakuP);
+        yla.add(ha);
+        
         paa.add(yla);
         paa.add(ala);
+        
         alusta.add(paa);
+        
         paneeli.add(alusta);
-        
-        haeNimi.addActionListener(new HakusananKuuntelija(nimiH, reseptiA, kirjasto));
-        haeAines.addActionListener(new HakusananKuuntelija(ainesH, reseptiValinta, reseptiValintaL, kirjasto));
-        
-        reseptiValinta.addActionListener(new AinesHaunKuuntelija(ainesH, reseptiA, kirjasto));
-        
         
         return paneeli;
     }
@@ -397,9 +407,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         
         JPanel aines = new JPanel();
         JTextField nimi = new JTextField("Ainesosa");
-        nimi.setPreferredSize(new Dimension(100,23));
+        nimi.setPreferredSize(new Dimension(100,20));
         JTextField maara = new JTextField("Määrä");
-        maara.setPreferredSize(new Dimension(66,23));
+        maara.setPreferredSize(new Dimension(66,20));
         
         JButton lisaaAB = new JButton("Lisää");
         
@@ -498,6 +508,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
     private void tyhjennys() {
         aineslista.setListData(new String[0]);
         aineslista2.setListData(new String[0]);
+        hakutulos.setListData(new String[0]);
         ainesosat.clear();
         nimiT.setText("");
         ohjeetA.setText("");
@@ -505,5 +516,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         lajiValinta.setSelectedIndex(0);
         reseptiValinta.setSelectedIndex(0);
         reseptiA.setText("");
+        reseptitulos.setText("");
+        hakukentta.setText("");
     }
 }

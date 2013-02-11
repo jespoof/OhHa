@@ -19,3 +19,5 @@ päivä	aika	kohde
 4.2	5 h	Graafista käyttöliittymää, sekvenssikaavioita, JavaDocin aloittaminen
 5.2	5 h	JavaDocin kirjoittamista, Graafista käyttöliittymää
 6.2	2 h	JavaDocia, sekvenssikaavio
+8.2	1,5 h	Ainesten tyhjennyksen korjaaminen
+10.2	2,5 h	Hakuominaisuuden muokkaamista, koodin siistimistä

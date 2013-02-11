@@ -244,7 +244,7 @@ public class Reseptikirjasto {
         for (Ruokalaji ruokalaji : ruokalajit) {
             reseptihaku = ruokalaji.ainesHaku(haku);
             for (Resepti resepti : reseptihaku) {
-                hakutulokset.add(resepti.getNimi());
+                hakutulokset.add(resepti.getNimi()+" ("+ruokalaji.getNimi()+")");
             }
         }
         
@@ -278,7 +278,7 @@ public class Reseptikirjasto {
     * 
     * @param haku Käyttäjän antama hakusana
     * 
-    * @return ArrayList, joka sisältää kaikki Reseptit, joilla on haluttu nimi
+    * @return String, jossa listattuna kaikki Reseptien nimet, joissa hakusana
     * Jos tyhjä, palautetaan "Ei hakutuloksia"
     */
     public String haeNimellaString(String haku) {
@@ -322,7 +322,7 @@ public class Reseptikirjasto {
         for (Ruokalaji ruokalaji : ruokalajit) {
             reseptihaku = ruokalaji.nimiHaku(haku);
             for (Resepti resepti : reseptihaku) {
-                hakutulokset.add(resepti.getNimi());
+                hakutulokset.add(resepti.getNimi()+" ("+ruokalaji.getNimi()+")");
             }
         }
         

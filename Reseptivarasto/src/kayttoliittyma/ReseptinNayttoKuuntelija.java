@@ -28,7 +28,6 @@ public class ReseptinNayttoKuuntelija implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        
         JComboBox cb = (JComboBox)ae.getSource();
         int reseptiNumero = cb.getSelectedIndex()-1;
         
@@ -36,5 +35,4 @@ public class ReseptinNayttoKuuntelija implements ActionListener{
             reseptiNaytto.setText(kirjasto.getResepti(laji.getSelectedIndex()-1, reseptiNumero).toString());
         }
       }
-    
 }

@@ -54,7 +54,7 @@ public class Ainekset {
         
         for (Ainesosa ainesosa : aines) {
             
-            if (ainesosa.getNimi().equals(haku)){
+            if (ainesosa.getNimi().equalsIgnoreCase(haku)){
                 return true;
             }
         }
