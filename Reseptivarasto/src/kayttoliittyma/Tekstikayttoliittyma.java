@@ -10,6 +10,7 @@ import reseptivarasto.domain.Ainekset;
 import reseptivarasto.domain.Ainesosa;
 import reseptivarasto.domain.Resepti;
 import reseptivarasto.domain.Reseptikirjasto;
+import reseptivarasto.domain.Ruokalaji;
 import tiedostonkasittelija.RuokalajienKasittelija;
 
 /**
@@ -36,6 +37,14 @@ public class Tekstikayttoliittyma {
             ruokalajikasittelija = new RuokalajienKasittelija("kirjasto.txt");
             
             kirjasto = new Reseptikirjasto(ruokalajikasittelija.lueRuokalajit());
+            
+            if (kirjasto.getRuokalajit().isEmpty()) {
+            kirjasto.lisaaRuokalaji(new Ruokalaji("AAMIAINEN"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("LOUNAS"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("PÄIVÄLLINEN"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("JÄLKIRUOKA"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("PIKKUPURTAVAA"));
+        }
             
             while (true) {
                 

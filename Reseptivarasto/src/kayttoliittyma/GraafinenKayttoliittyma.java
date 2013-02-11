@@ -57,6 +57,13 @@ public class GraafinenKayttoliittyma implements ActionListener {
         
         ruokalajikasittelija = new RuokalajienKasittelija("kirjasto.txt");
         kirjasto = new Reseptikirjasto(ruokalajikasittelija.lueRuokalajit());
+        if (kirjasto.getRuokalajit().isEmpty()) {
+            kirjasto.lisaaRuokalaji(new Ruokalaji("AAMIAINEN"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("LOUNAS"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("PÄIVÄLLINEN"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("JÄLKIRUOKA"));
+            kirjasto.lisaaRuokalaji(new Ruokalaji("PIKKUPURTAVAA"));
+        }
         ainesosat = new ArrayList<Ainesosa>();
         
     }
