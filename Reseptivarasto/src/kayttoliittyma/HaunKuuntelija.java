@@ -47,14 +47,16 @@ public class HaunKuuntelija implements ActionListener{
     
     public void nimiHaku() {
         ArrayList<Resepti> haetut = kirjasto.haeNimellaALResepti(haku.getText());
-        if (haetut.size()>0) {
-            reseptiA.setText(haetut.get(tulokset.getSelectedIndex()).toString());
-        }   
+        tuloksetNaytetaan(haetut); 
     }
     
     public void ainesosaHaku() {
         ArrayList<Resepti> haetut = kirjasto.haeAinesosallaALResepti(haku.getText());
-        if (haetut.size()>0) {
+        tuloksetNaytetaan(haetut);
+    }
+    
+    public void tuloksetNaytetaan(ArrayList<Resepti> haetut) {
+         if (haetut.size()>0) {
             reseptiA.setText(haetut.get(tulokset.getSelectedIndex()).toString());
         }
     }

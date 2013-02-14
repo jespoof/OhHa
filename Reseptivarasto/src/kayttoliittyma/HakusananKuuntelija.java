@@ -7,13 +7,9 @@ package kayttoliittyma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import reseptivarasto.domain.Resepti;
 import reseptivarasto.domain.Reseptikirjasto;
 
 /**
@@ -49,22 +45,24 @@ public class HakusananKuuntelija implements ActionListener{
     public void haeNimella() {
         ArrayList<String> hakutuloksetS = kirjasto.haeNimellaALString(hakusana.getText());
         
-        if (hakutuloksetS.size() > 0) {
-            String r[] = new String[hakutuloksetS.size()];
-            r = hakutuloksetS.toArray(r);
-            hakutulos.setListData(r);
-        }
+        hakuListalle(hakutuloksetS);
+       
     }
     
     public void haeAinesosalla() {
         ArrayList<String> hakutuloksetS = kirjasto.haeAinesosallaALString(hakusana.getText());
         
+        hakuListalle(hakutuloksetS);
+        
+    }
+    
+    public void hakuListalle(ArrayList<String> hakutuloksetS) {
         if (hakutuloksetS.size() > 0) {
             String r[] = new String[hakutuloksetS.size()];
             r = hakutuloksetS.toArray(r);
             hakutulos.setListData(r);
         }
-    }
+    } 
 }
     
 
