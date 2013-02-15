@@ -21,3 +21,5 @@ päivä	aika	kohde
 6.2	2 h	JavaDocia, sekvenssikaavio
 8.2	1,5 h	Ainesten tyhjennyksen korjaaminen
 10.2	2,5 h	Hakuominaisuuden muokkaamista, koodin siistimistä
+14.2 	0,5 h 	Pientä korjailua
+15.2	2 h	Ilmoittimen korjaaminen

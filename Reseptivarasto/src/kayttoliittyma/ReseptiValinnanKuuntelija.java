@@ -57,6 +57,8 @@ public class ReseptiValinnanKuuntelija implements ActionListener{
         
             ainesosatStringille();
             ohjeet.setText(resepti.getOhjeet());
+        } else {
+            tyhjennys();
         }
     }
         
@@ -70,5 +72,12 @@ public class ReseptiValinnanKuuntelija implements ActionListener{
         String [] lista = new String[osat.size()];
         lista = osat.toArray(lista);
         aineslista.setListData(lista);
+    }
+    
+    public void tyhjennys() {
+        nimi.setText("");
+        ainesosat.clear();
+        aineslista.setListData(new String[0]);
+        ohjeet.setText("");
     }
 }

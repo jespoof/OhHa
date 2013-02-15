@@ -81,8 +81,12 @@ public class Resepti implements Comparable<Resepti>{
     */
     @Override
     public String toString() {
+        String tahdet = "";
+        for (int i = 0; i < nimi.length(); i++) {
+            tahdet+="-";
+        }
         
-        return this.nimi + "\n" + "\n" + "Ainekset:" + "\n" + ainekset.toString() + "\n" + "Valmistusohjeet:" + "\n" + ohjeet;
+        return this.nimi.toUpperCase() + "\n\n\n" +  "AINEKSET:\n" + ainekset.toString() + "\n\n" + "VALMISTUSOHJEET:\n" + ohjeet;
     }
     
     /**

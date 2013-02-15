@@ -45,9 +45,17 @@ public class GraafinenKayttoliittyma implements ActionListener {
     
     private JTextField nimiTextField;
     private JTextArea ohjeetArea;
-    private JComboBox lajinValinta;
-    private JComboBox reseptinValinta;
-    private JLabel ilmoitus;
+    
+    private JComboBox lajinValintaLisaa;
+    private JComboBox lajinValintaMuokkaa;
+    private JComboBox lajinValintaReseptit;
+    
+    private JComboBox reseptinValintaMuokkaa;
+    private JComboBox reseptinValintaReseptit;
+    
+    private JLabel lisaaIlmoitus;
+    private JLabel muokkaaIlmoitus;
+    
     private JTextArea reseptiArea;
     private JTextArea reseptitulos;
     private JTextField hakukentta;
@@ -143,9 +151,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         
         JPanel lajiPaneeli = new JPanel();
         JLabel lajiLabel = new JLabel("Ruokalaji:       ");
-        lajinValinta = ruokalajit();
+        lajinValintaLisaa = ruokalajit();
         lajiPaneeli.add(lajiLabel);
-        lajiPaneeli.add(lajinValinta);
+        lajiPaneeli.add(lajinValintaLisaa);
         
         aineslista = new JList(new String[0]);
         aineslista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -164,7 +172,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JPanel loppu = new JPanel();
         loppu.setLayout(new GridLayout(1,2));
         
-        JPanel ilmoitin = ilmoitin();
+        JPanel ilmoitin = new JPanel();
+        lisaaIlmoitus = new JLabel("");
+        ilmoitin.add(lisaaIlmoitus);
         
         JPanel tallennaTaiPeruuta = new JPanel();
         tallennaTaiPeruuta.setPreferredSize(new Dimension(1,1));
@@ -174,8 +184,8 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JButton tallennaB = new JButton("Tallenna");
         JButton peruB = new JButton("Peruuta");
         
-        tallennaB.addActionListener(new ReseptinKuuntelija(lajinValinta, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista, ruokalajikasittelija, ilmoitus));
-        peruB.addActionListener(new ReseptinKuuntelija(lajinValinta, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista, ruokalajikasittelija, ilmoitus));
+        tallennaB.addActionListener(new ReseptinKuuntelija(lajinValintaLisaa, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista, ruokalajikasittelija, lisaaIlmoitus));
+        peruB.addActionListener(new ReseptinKuuntelija(lajinValintaLisaa, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista, ruokalajikasittelija, lisaaIlmoitus));
         
         tallennaTaiPeruuta.add(tallennaB);
         tallennaTaiPeruuta.add(peruB);
@@ -205,15 +215,15 @@ public class GraafinenKayttoliittyma implements ActionListener {
         lajiJaResepti.setBorder(BorderFactory.createEmptyBorder(25, 25, 0, 25));
         
         JLabel lajiLabel = new JLabel("Valitse ruokalaji:");
-        lajinValinta = ruokalajit();
+        lajinValintaMuokkaa = ruokalajit();
         JLabel reseptiValintaLabel = new JLabel("Valitse resepti:");
-        reseptinValinta = lajinReseptit();
+        reseptinValintaMuokkaa = lajinReseptit();
         
-        lajinValinta.addActionListener(new RuokalajinKuuntelija(reseptinValinta,kirjasto));
+        lajinValintaMuokkaa.addActionListener(new RuokalajinKuuntelija(reseptinValintaMuokkaa,kirjasto));
         lajiJaResepti.add(lajiLabel);
-        lajiJaResepti.add(lajinValinta);
+        lajiJaResepti.add(lajinValintaMuokkaa);
         lajiJaResepti.add(reseptiValintaLabel);
-        lajiJaResepti.add(reseptinValinta);
+        lajiJaResepti.add(reseptinValintaMuokkaa);
         
         yla.add(lajiJaResepti);
         
@@ -243,19 +253,21 @@ public class GraafinenKayttoliittyma implements ActionListener {
         ala.add(vasen);
         ala.add(oikea);
         
-        reseptinValinta.addActionListener(new ReseptiValinnanKuuntelija(lajinValinta, nimiTextField, ainesosat, aineslista2, ohjeetArea, kirjasto));
+        reseptinValintaMuokkaa.addActionListener(new ReseptiValinnanKuuntelija(lajinValintaMuokkaa, nimiTextField, ainesosat, aineslista2, ohjeetArea, kirjasto));
         
-        JPanel ilmoitin = ilmoitin();
+        JPanel ilmoitin = new JPanel();
+        muokkaaIlmoitus = new JLabel("");
+        ilmoitin.add(muokkaaIlmoitus);
         
         JPanel tallennaPeruTaiPoistaPaneeli = new JPanel();
         tallennaPeruTaiPoistaPaneeli.setLayout(new FlowLayout());
         
         JButton tallennaB = new JButton("Tallenna ");
-        tallennaB.addActionListener(new ReseptinKuuntelija(lajinValinta, reseptinValinta, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista2, ruokalajikasittelija, ilmoitus));
+        tallennaB.addActionListener(new ReseptinKuuntelija(lajinValintaMuokkaa, reseptinValintaMuokkaa, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista2, ruokalajikasittelija, muokkaaIlmoitus));
         JButton peruB = new JButton("Peruuta");
-        peruB.addActionListener(new ReseptinKuuntelija(lajinValinta, reseptinValinta, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista2, ruokalajikasittelija, ilmoitus));
+        peruB.addActionListener(new ReseptinKuuntelija(lajinValintaMuokkaa, reseptinValintaMuokkaa, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista2, ruokalajikasittelija, muokkaaIlmoitus));
         JButton poistaB = new JButton("Poista resepti");
-        poistaB.addActionListener(new ReseptinKuuntelija(lajinValinta, reseptinValinta, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista2, ruokalajikasittelija, ilmoitus));
+        poistaB.addActionListener(new ReseptinKuuntelija(lajinValintaMuokkaa, reseptinValintaMuokkaa, nimiTextField, ainesosat, ohjeetArea, kirjasto, aineslista2, ruokalajikasittelija, muokkaaIlmoitus));
         
         tallennaPeruTaiPoistaPaneeli.add(tallennaB);
         tallennaPeruTaiPoistaPaneeli.add(peruB);
@@ -288,20 +300,20 @@ public class GraafinenKayttoliittyma implements ActionListener {
         
         JPanel lajiPaneeli = new JPanel();
         JLabel lajiLabel = new JLabel("Valitse ruokalaji:");
-        lajinValinta = ruokalajit();
+        lajinValintaReseptit = ruokalajit();
         lajiJaResepti.add(lajiLabel);
-        lajiJaResepti.add(lajinValinta);
+        lajiJaResepti.add(lajinValintaReseptit);
         
         JPanel reseptiPaneeli = new JPanel();
         JLabel reseptiValintaLabel = new JLabel("Valitse resepti:");
-        reseptinValinta = lajinReseptit();
+        reseptinValintaReseptit = lajinReseptit();
         lajiJaResepti.add(reseptiValintaLabel);
-        lajiJaResepti.add(reseptinValinta);
+        lajiJaResepti.add(reseptinValintaReseptit);
         
         JPanel ala = reseptiAlus();
         
-        lajinValinta.addActionListener(new RuokalajinKuuntelija(reseptinValinta, kirjasto));
-        reseptinValinta.addActionListener(new ReseptinNayttoKuuntelija(lajinValinta, reseptiArea, kirjasto));
+        lajinValintaReseptit.addActionListener(new RuokalajinKuuntelija(reseptinValintaReseptit, kirjasto));
+        reseptinValintaReseptit.addActionListener(new ReseptinNayttoKuuntelija(lajinValintaReseptit, reseptiArea, kirjasto));
         
         yla.add(lajiJaResepti);
         paa.add(yla);
@@ -397,13 +409,6 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JScrollPane ohjeetP = new JScrollPane(ohjeetArea);
         oikea.add(ohjeetP);
         return oikea;
-    }
-
-    private JPanel ilmoitin() {
-        JPanel ilmoitin = new JPanel();
-        ilmoitus = new JLabel("");
-        ilmoitin.add(ilmoitus);
-        return ilmoitin;
     }
 
     private JPanel ainekset(JList lista) {
@@ -519,9 +524,13 @@ public class GraafinenKayttoliittyma implements ActionListener {
         ainesosat.clear();
         nimiTextField.setText("");
         ohjeetArea.setText("");
-        ilmoitus.setText("");
-        lajinValinta.setSelectedIndex(0);
-        reseptinValinta.setSelectedIndex(0);
+        lisaaIlmoitus.setText("");
+        muokkaaIlmoitus.setText("");
+        lajinValintaLisaa.setSelectedIndex(0);
+        lajinValintaMuokkaa.setSelectedIndex(0);
+        lajinValintaReseptit.setSelectedIndex(0);
+        reseptinValintaMuokkaa.setSelectedIndex(0);
+        reseptinValintaReseptit.setSelectedIndex(0);
         reseptiArea.setText("");
         reseptitulos.setText("");
         hakukentta.setText("");
