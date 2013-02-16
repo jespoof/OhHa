@@ -13,6 +13,7 @@ import reseptivarasto.domain.Reseptikirjasto;
 /**
  *
  * @author Johanna
+ * ReseptinNayttoKuuntelija näyttää ComboBoxista valitun reseptin
  */
 public class ReseptinNayttoKuuntelija implements ActionListener{
     
@@ -33,6 +34,7 @@ public class ReseptinNayttoKuuntelija implements ActionListener{
         
         if (reseptiNumero > -1) {
             reseptiNaytto.setText(kirjasto.getResepti(laji.getSelectedIndex()-1, reseptiNumero).toString());
+            reseptiNaytto.setCaretPosition(0);
         }
       }
 }

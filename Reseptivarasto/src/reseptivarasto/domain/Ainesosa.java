@@ -33,7 +33,7 @@ public class Ainesosa {
     @Override
     public String toString() {
         
-        return "    " + nimi + ", " + maara;
+        return "  - " + nimi + ", " + maara;
     }
     
 }

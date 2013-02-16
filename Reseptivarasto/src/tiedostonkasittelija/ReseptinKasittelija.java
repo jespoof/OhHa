@@ -104,7 +104,7 @@ public class ReseptinKasittelija {
         
         String nimi = r[0];
         String ainekset1 = r[1];
-        String ohjeet = r[2];
+        String ohjeet = rivitaOhjeet(r[2]);
         
         Ainekset ainekset = kasitteleAinekset(ainekset1);
         
@@ -112,6 +112,16 @@ public class ReseptinKasittelija {
         
         return uusi;
         
+    }
+    
+    public String rivitaOhjeet(String ohje) {
+        String ohjeet = "";
+        String[] rivit = ohje.split(":&n:");
+        for (String rivi : rivit) {
+            ohjeet += rivi + "\n";
+        }
+        
+        return ohjeet;
     }
     
     /**
@@ -154,7 +164,7 @@ public class ReseptinKasittelija {
         FileWriter kirjoittaja = new FileWriter(tiedosto);
         
         for (Resepti r : reseptit) {
-            kirjoittaja.write(r.getNimi() + "&!" + r.tiedostoon() + "&!" + r.getOhjeet() + "///=");
+            kirjoittaja.write(r.getNimi() + "&!" + r.aineksetTiedostoon() + "&!" + r.ohjeetTiedostoon() + "///=");
         }
         
         kirjoittaja.close();

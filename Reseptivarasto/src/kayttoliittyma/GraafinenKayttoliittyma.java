@@ -15,20 +15,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
 import reseptivarasto.domain.Ainesosa;
-import reseptivarasto.domain.Resepti;
 import reseptivarasto.domain.Reseptikirjasto;
 import reseptivarasto.domain.Ruokalaji;
 import tiedostonkasittelija.RuokalajienKasittelija;
 
 public class GraafinenKayttoliittyma implements ActionListener {
-
+    
+    /**
+    * Paneelien nimet Stringinä tunnistamista varten
+    */
     private static final String ALKU = "AlkuP";
     private static final String LISAA = "LiaaaP";
     private static final String MUOKKAA = "MuokkaaP";
     private static final String LAJILISTAUS = "LajilistausP";
     private static final String HAKU = "HakuP";
     
+    /**
+    * CardLayoutia käyttävä paneeli
+    */
     private JPanel kortit;
+    
+    /**
+    * Painikkeet, joilla vaihdetaan paneelia
+    */
     private JButton lisaaB = new JButton("Lisää resepti");
     private JButton muokkaaB = new JButton("Muokkaa reseptiä");
     private JButton hakuB = new JButton("Reseptihaku");
@@ -38,27 +47,73 @@ public class GraafinenKayttoliittyma implements ActionListener {
     private Reseptikirjasto kirjasto;
     private RuokalajienKasittelija ruokalajikasittelija;
     
+    /**
+    * ArrayList, johon tallennetaan käyttäjän lisäämät Ainesosat Reseptin
+    * kokoamista varten
+    */
     private ArrayList<Ainesosa> ainesosat;
+    
+    /**
+    * Lista, jossa on käyttäjän lisäämät Ainesosat Lisää resepti -kohdassa
+    */
     private JList aineslista;
+    
+    /**
+    * Lista, jossa on käyttäjän lisäämät Ainesosat Muokkaa reseptiä -kohdassa
+    */
     private JList aineslista2;
+    
+    /**
+    * Lista, joka sisältää hakutulokset Reseptihaussa
+    */
     private JList hakutulos;
     
+    /**
+    * Kenttä, johon kirjoitetaan hakusana
+    */
+    private JTextField hakukentta;
+    
+    /**
+    * Reseptin nimi kirjoitetaan tähän
+    */
     private JTextField nimiTextField;
+    
+    /**
+    * Reseptin ohjeet kirjoitetaan tähän
+    */
     private JTextArea ohjeetArea;
     
+    
+    /**
+    * Valittu resepti näytetään, 
+    */
+    private JTextArea reseptiArea;
+    private JTextArea reseptitulos;
+    
+    /**
+    * ComboBox, josta valitaan Ruokalaji, Lisää resepti, Muokkaa reseptiä ja
+    * Reseptit paneeleilla on kaikilla omat tällaiset
+    */
     private JComboBox lajinValintaLisaa;
     private JComboBox lajinValintaMuokkaa;
     private JComboBox lajinValintaReseptit;
     
+    /**
+    * ComboBox, josta valitaan näytettävä Resepti, Muokkaa reseptiä ja Reseptit
+    * - paneeleilla on omat tällaiset
+    */
     private JComboBox reseptinValintaMuokkaa;
     private JComboBox reseptinValintaReseptit;
     
+    /**
+    * Sisältävät ilmoitukset joko toiminnon onnistumiseta tai epäonnistumisesta,
+    * Lisää resepti ja Muokkaa resepti -paneeleilla on omat tällaiset
+    */
     private JLabel lisaaIlmoitus;
     private JLabel muokkaaIlmoitus;
     
-    private JTextArea reseptiArea;
-    private JTextArea reseptitulos;
-    private JTextField hakukentta;
+    
+    
     
     
     public GraafinenKayttoliittyma() throws IOException {
@@ -76,6 +131,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         
     }
     
+    /**
+    * Käynnistää graafisen käyttöliittymän
+    */
     public void kaynnista(){
         
         JFrame frame = new JFrame("RESEPTIVARASTO");
@@ -89,6 +147,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         frame.setVisible(true);
     }
     
+    /**
+    * Luo paneelin, joka sisältää napit, joista pääsee muihin paneeleihin
+    */
     private JPanel nappiPaneeli() {
         JPanel napit = new JPanel(new GridLayout(5, 1, 5, 5));
         
@@ -106,7 +167,10 @@ public class GraafinenKayttoliittyma implements ActionListener {
         
         return napit;
     }
-
+    
+    /**
+    * Sisältää muut pääpaneelit
+    */
     private JPanel korttiPaneeli() {
         kortit = new JPanel(new CardLayout());
         kortit.add(alku(), ALKU);
@@ -117,7 +181,11 @@ public class GraafinenKayttoliittyma implements ActionListener {
 
         return kortit;
     }
-
+    
+    /**
+    * Ohjelman käynnityksen alussa näytettävä paneeli, joka toivottaa käyttäjän
+    * tervetulleeksi Reseptivarastoon
+    */
     private JPanel alku() {
         JPanel paneeli = new JPanel();
         JLabel alkuL = new JLabel("Tervetuloa Reseptivarastoon!");
@@ -127,6 +195,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return paneeli;
     }
     
+    /**
+    * Paneeli, jossa lisätään uusia Reseptejä kirjastoon
+    */
     private JPanel lisaa() {
         
         JPanel paneeli = new JPanel();
@@ -142,12 +213,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JPanel vasen = new JPanel();
         vasen.setLayout(new BoxLayout(vasen, BoxLayout.Y_AXIS));
         
-        JPanel nimiPaneeli = new JPanel();
-        JLabel nimiLabel = new JLabel("Reseptin nimi:");
-        nimiTextField = new JTextField();
-        nimiTextField.setPreferredSize(new Dimension(169,20));
-        nimiPaneeli.add(nimiLabel);
-        nimiPaneeli.add(nimiTextField);
+        JPanel nimiPaneeli = nimiPaneeli();
         
         JPanel lajiPaneeli = new JPanel();
         JLabel lajiLabel = new JLabel("Ruokalaji:       ");
@@ -200,6 +266,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return paneeli;
     }
     
+    /**
+    * Paneeli, jossa muokataan kirjastoon jo lisättyjä reseptejä
+    */
     private JPanel muokkaa() {
         JPanel paneeli = new JPanel();
         paneeli.setLayout(new BoxLayout(paneeli, BoxLayout.Y_AXIS));
@@ -233,12 +302,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JPanel vasen = new JPanel();
         vasen.setLayout(new BoxLayout(vasen, BoxLayout.Y_AXIS));
         
-        JPanel nimiPaneeli = new JPanel();
-        JLabel nimiLabel = new JLabel("Reseptin nimi:");
-        nimiTextField = new JTextField();
-        nimiTextField.setPreferredSize(new Dimension(169,20));
-        nimiPaneeli.add(nimiLabel);
-        nimiPaneeli.add(nimiTextField);
+        JPanel nimiPaneeli = nimiPaneeli();
         
         aineslista2 = new JList(new String[0]);
         aineslista2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -284,6 +348,10 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return paneeli;
     }
     
+    /**
+    * Paneeli, joissa käyttäjä voi valita ensin Ruokalajin ja sitten jonkun
+    * siihen tallennetuista Resepteistä ja katsoa tämän, Reseptiä ei voi muokata
+    */
     private JPanel reseptit() {
         JPanel paneeli = new JPanel();
         paneeli.setLayout(new BoxLayout(paneeli, BoxLayout.Y_AXIS));
@@ -324,6 +392,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return paneeli;
     }
     
+    /**
+    * Paneeli, jossa käyttäjä voi hakea reseptiä joko nimen tai ainesosan perusteella
+    */
     private JPanel haku() {
         JPanel paneeli = new JPanel();
         paneeli.setLayout(new BoxLayout(paneeli, BoxLayout.Y_AXIS));
@@ -356,21 +427,26 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JPanel ala = new JPanel();
         ala.setLayout(new FlowLayout());
         reseptitulos = new JTextArea();
+        reseptitulos.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         reseptitulos.setLineWrap(true);
         reseptitulos.setWrapStyleWord(true);
         reseptitulos.setEditable(false);
         
         JPanel tulosPaneeli = new JPanel();
         tulosPaneeli.setLayout(new BoxLayout(tulosPaneeli, BoxLayout.Y_AXIS));
+        tulosPaneeli.setBorder(BorderFactory.createTitledBorder("Hakutulokset"));
         hakutulos = new JList(new String[0]);
         JScrollPane tulosScrollPane = new JScrollPane(hakutulos);
-        tulosScrollPane.setPreferredSize(new Dimension(140,275));
+        tulosScrollPane.setPreferredSize(new Dimension(190,237));
+        JPanel valitseNappiPaneeli = new JPanel();
+        valitseNappiPaneeli.setLayout(new FlowLayout());
         JButton valitse = new JButton("Valitse");
+        valitseNappiPaneeli.add(valitse);
         tulosPaneeli.add(tulosScrollPane);
-        tulosPaneeli.add(valitse);
+        tulosPaneeli.add(valitseNappiPaneeli);
         
         JScrollPane reseptiAlus = new JScrollPane(reseptitulos);
-        reseptiAlus.setPreferredSize(new Dimension(388,300));
+        reseptiAlus.setPreferredSize(new Dimension(310,300));
         
         hakunappi.addActionListener(new HakusananKuuntelija(nimiVaiAines, hakukentta, hakutulos, kirjasto));
         valitse.addActionListener(new HaunKuuntelija(nimiVaiAines, hakukentta, hakutulos, reseptitulos, kirjasto));
@@ -391,6 +467,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return paneeli;
     }
     
+    /**
+    * Luo otsikoidun paneelin, jonka sisältä löytyvät toiminnot
+    */
     private JPanel paaPaneelinLuominen(String otsikko){
         JPanel paa = new JPanel();
         paa.setPreferredSize(new Dimension(600,460));
@@ -398,19 +477,39 @@ public class GraafinenKayttoliittyma implements ActionListener {
         paa.setBorder(BorderFactory.createTitledBorder(otsikko));
         return paa;
     }
-
+    
+    /**
+    * Luo paneelin, joka sisältää kentän Reseptin nimeä varten 
+    */
+    private JPanel nimiPaneeli() {
+        JPanel nimiPaneeli = new JPanel();
+        JLabel nimiLabel = new JLabel("Reseptin nimi:");
+        nimiTextField = new JTextField();
+        nimiTextField.setPreferredSize(new Dimension(160,20));
+        nimiPaneeli.add(nimiLabel);
+        nimiPaneeli.add(nimiTextField);
+        return nimiPaneeli;
+    }
+    
+    /**
+    * Luo paneelin, joka sisältää paneelin ohjeiden kirjoittamista tai muokkaamista varten 
+    */
     private JPanel ohjePaneeli(){
         JPanel oikea = new JPanel();
         oikea.setLayout(new BoxLayout(oikea, BoxLayout.Y_AXIS));
         oikea.setBorder(BorderFactory.createTitledBorder("Ohjeet"));
         ohjeetArea = new JTextArea();
+        ohjeetArea.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         ohjeetArea.setLineWrap(true);
         ohjeetArea.setWrapStyleWord(true);
         JScrollPane ohjeetP = new JScrollPane(ohjeetArea);
         oikea.add(ohjeetP);
         return oikea;
     }
-
+    
+    /**
+    * Luo paneelin, jossa voi lisätä ja poistaa ainesosia
+    */
     private JPanel ainekset(JList lista) {
         
         JPanel paneeli = new JPanel();
@@ -433,7 +532,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         aineksetPaneeli.setLayout(new BoxLayout(aineksetPaneeli, BoxLayout.Y_AXIS));
         
         JScrollPane scroll = new JScrollPane(lista);
-        scroll.setPreferredSize(new Dimension(100,100));
+        scroll.setPreferredSize(new Dimension(100,120));
         
         lisaa.addActionListener(new AineksenKuuntelija(nimi,maara,ainesosat,lista));
         
@@ -449,11 +548,13 @@ public class GraafinenKayttoliittyma implements ActionListener {
         paneeli.add(aineksetPaneeli);
         paneeli.add(poistaNapinPaneeli);
         
-        
-        
         return paneeli;
     }
-        
+    
+    /**
+    * Luo ComboBoxin, joka on alussa tyhjä, mutta johon tulee valitun ruokalajin
+    * sisältämät reseptit
+    */
     private JComboBox lajinReseptit() {
         
         String r[] = new String[0];
@@ -464,6 +565,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return vaihtoehdot;
     }
     
+    /**
+    * Luo ComboBoxin, josta voi valita Ruokalajin
+    */
     private JComboBox ruokalajit() {
         
         String[] ruokalajit = new String[kirjasto.getRuokalajitString().size()];
@@ -471,15 +575,19 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JComboBox vaihtoehdot = new JComboBox(ruokalajit);
         vaihtoehdot.insertItemAt("---", 0);
         vaihtoehdot.setSelectedIndex(0);
-        vaihtoehdot.setPreferredSize(new Dimension(169, 23));
+        vaihtoehdot.setPreferredSize(new Dimension(160, 23));
         
         return vaihtoehdot;
     }
     
+    /**
+    * Luo paneelin reseptin näyttämistä varten
+    */
     private JPanel reseptiAlus() {
         JPanel ala = new JPanel();
         ala.setPreferredSize(new Dimension(548,300));
         reseptiArea = new JTextArea("");
+        reseptiArea.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         reseptiArea.setLineWrap(true);
         reseptiArea.setWrapStyleWord(true);
         reseptiArea.setEditable(false);
@@ -489,8 +597,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         return ala;
     }
     
-    
-    
+    /**
+    * Kuuntelee, mikä paneeli pitäisi näyttää 
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cardLayout = (CardLayout) (kortit.getLayout());
@@ -517,6 +626,9 @@ public class GraafinenKayttoliittyma implements ActionListener {
         }
     }
     
+    /**
+    * Tyhjentää kentät
+    */
     private void tyhjennys() {
         aineslista.setListData(new String[0]);
         aineslista2.setListData(new String[0]);

@@ -28,10 +28,11 @@ public class Tekstikayttoliittyma {
     RuokalajienKasittelija ruokalajikasittelija;
     
     public Tekstikayttoliittyma() {
-        
-  
     }
-
+    
+    /**
+    * Käynnistää tekstikäyttöliittymän, josta valitaan haluttu toiminto
+    */
     public void kaynnista() throws IOException {
         
             ruokalajikasittelija = new RuokalajienKasittelija("kirjasto.txt");
@@ -127,8 +128,8 @@ public class Tekstikayttoliittyma {
                     System.out.println("POISTA RESEPTI");
                     System.out.println("");
                     
-                    int laji = hakuRuokalajista();
-                    int poisto = reseptinHaku(laji);
+                    int laji = valitseRuokalaji();
+                    int poisto = valitseResepti(laji);
                     
                     System.out.println("Poistetaanko varmasti? (K/E)");
                     String varmistus = lukija.nextLine();
@@ -145,8 +146,8 @@ public class Tekstikayttoliittyma {
                     System.out.println("RESEPTIHAKU RUOKALAJIN MUKAAN");
                     System.out.println("");
                     
-                    int num = hakuRuokalajista();
-                    int num2 = reseptinHaku(num);
+                    int num = valitseRuokalaji();
+                    int num2 = valitseResepti(num);
                     
                     System.out.println("");
                     System.out.println("---");
@@ -229,7 +230,9 @@ public class Tekstikayttoliittyma {
     }
 
     
-    
+    /**
+    * Käyttäjä lisää Ainesosan
+    */
     public void lisaaAineksia() {
         
         System.out.println("");
@@ -249,7 +252,10 @@ public class Tekstikayttoliittyma {
     }
     
     
-    public int reseptinHaku(int num) {
+    /**
+    * Käyttäjä valitsee haluamansa Reseptin numeron Ruokalajin reseptilistalta
+    */
+    public int valitseResepti(int num) {
         
         while (true) {
                         
@@ -274,8 +280,10 @@ public class Tekstikayttoliittyma {
         }
     }
     
-    
-    public int hakuRuokalajista() {
+    /**
+    * Käyttäjä valitsee haluamansa Ruokalajin numeron
+    */
+    public int valitseRuokalaji() {
         
         int num = 0;
         
@@ -288,7 +296,7 @@ public class Tekstikayttoliittyma {
             } catch (Exception e) {
                 System.out.println("Et syöttänyt kunnollista numeroa.");
                 System.out.println("");
-                hakuRuokalajista();
+                valitseRuokalaji();
             }
         }
                 
@@ -296,7 +304,9 @@ public class Tekstikayttoliittyma {
         return num;
     }
     
-    
+    /**
+    * Käyttäjä valitsee, minkä Reseptin hakutuloksista haluaa näkyville
+    */
     public void mikaHakutuloksista() {
         
         int haku = 0;
@@ -326,6 +336,9 @@ public class Tekstikayttoliittyma {
         
     }
     
+    /**
+    * Tarkistaa, että käyttäjä ei ole syöttänyt tyhjää
+    */
     public String tyhjanTarkistus(String sana) {
         
         if (sana.equals("")) {

@@ -49,6 +49,9 @@ public class AineksenKuuntelija implements ActionListener{
         }
     }
     
+    /**
+    * Lisää Ainesosan
+    */
     public void lisaa() {
         if(!nimi.getText().isEmpty() && !maara.getText().isEmpty()) {
                 ainesosat.add(new Ainesosa(nimi.getText(),maara.getText()));
@@ -58,6 +61,9 @@ public class AineksenKuuntelija implements ActionListener{
             }
     }
     
+    /**
+    * Poistaa Ainesosan
+    */
     public void poista() {
         int poistettava = lista.getSelectedIndex();
             
@@ -67,6 +73,9 @@ public class AineksenKuuntelija implements ActionListener{
             }
     }
     
+    /**
+    * Laittaa Ainesosat näkyviin listalle
+    */
     public void listaaAinekset() {
         ArrayList<String> osat = new ArrayList<String>();
             

@@ -24,7 +24,10 @@ public class RuokalajinKuuntelija implements ActionListener{
         this.reseptinValitsin = reseptinValitsin;
         this.kirjasto = kirjasto;
     }
-
+    
+    /**
+    * Näyttää ruokalajin reseptit reseptinValitsimessa
+    */
     @Override
     public void actionPerformed(ActionEvent ae) {
         JComboBox cb = (JComboBox)ae.getSource();
@@ -42,6 +45,9 @@ public class RuokalajinKuuntelija implements ActionListener{
         }
     }
     
+    /**
+    * Lisää viivat listan ensimmäiseksi kohdaksi
+    */
     private void lisaaViivat() {
         reseptinValitsin.insertItemAt("---", 0);
         reseptinValitsin.setSelectedIndex(0);

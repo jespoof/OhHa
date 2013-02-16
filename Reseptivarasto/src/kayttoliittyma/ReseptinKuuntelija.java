@@ -84,6 +84,9 @@ public class ReseptinKuuntelija implements ActionListener{
         }
     }
     
+    /**
+    * Tyhjentää kentät
+    */
     public void tyhjennys() {
         nimi.setText("");
         ohjeet.setText("");
@@ -93,6 +96,9 @@ public class ReseptinKuuntelija implements ActionListener{
         laji.setSelectedIndex(0);
     }
     
+    /**
+    * Tallentaa reseptin
+    */
     public void tallennus() {
         
         if (laji.getSelectedIndex()!=0 && !ainesosat.isEmpty() && !nimi.getText().isEmpty() && !ohjeet.getText().isEmpty() && onkoSamannimisia() == false) {
@@ -106,12 +112,15 @@ public class ReseptinKuuntelija implements ActionListener{
             kirjasto.lisaaResepti(lajiI, new Resepti (nimiS, ainekset, ohjeetS));
             tiedostoonKirjoittaminen("Reseptin tallentaminen epäonnistui");
             tyhjennys();
-            ilmoitus.setText("Resepti " + nimiS + " tallennettu");
+            ilmoitus.setText("Resepti tallennettu");
         } else {
             ilmoitus.setText("Olet tehnyt vääriä valintoja");
         }
     }
     
+    /**
+    * Poistaa reseptin
+    */
     public void poisto() {
         if (laji.getSelectedIndex() != 0 && reseptiC.getSelectedIndex() !=0) {
             kirjasto.reseptinPoisto(laji.getSelectedIndex()-1, reseptiC.getSelectedIndex()-1);
@@ -128,6 +137,9 @@ public class ReseptinKuuntelija implements ActionListener{
         }
     }
     
+    /**
+    * Tarkistaa, onko Ruokalajissa samannimisiä reseptejä
+    */
     public boolean onkoSamannimisia() {
         for (String n : kirjasto.getRuokalajinReseptit(laji.getSelectedIndex()-1)) {
             if (n.equals(nimi.getText())) {
@@ -137,6 +149,9 @@ public class ReseptinKuuntelija implements ActionListener{
         return false;
     }
     
+    /**
+    * Kirjoittaa reseptit tiedostoon
+    */
     public void tiedostoonKirjoittaminen(String ilm) {
         try {
             ruokalajikasittelija.kirjoitaRuokalajit(kirjasto.getRuokalajit());

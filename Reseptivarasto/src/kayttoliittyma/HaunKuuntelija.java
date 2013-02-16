@@ -17,6 +17,7 @@ import reseptivarasto.domain.Reseptikirjasto;
 /**
  *
  * @author Johanna
+ * HaunKuuntelija näyttää hakutuloksista valitun reseptin
  */
 public class HaunKuuntelija implements ActionListener{
     
@@ -45,19 +46,29 @@ public class HaunKuuntelija implements ActionListener{
         }
      }
     
+    /**
+    * Laittaa nimen perusteella haetut reseptit ArrayListille
+    */
     public void nimiHaku() {
         ArrayList<Resepti> haetut = kirjasto.haeNimellaALResepti(haku.getText());
         tuloksetNaytetaan(haetut); 
     }
     
+    /**
+    * Laittaa ainesosan perusteella haetut reseptit ArrayListille
+    */
     public void ainesosaHaku() {
         ArrayList<Resepti> haetut = kirjasto.haeAinesosallaALResepti(haku.getText());
         tuloksetNaytetaan(haetut);
     }
     
+    /**
+    * Näyttää ArrayListiltä käyttäjän valitseman reseptin JTextAreassa
+    */
     public void tuloksetNaytetaan(ArrayList<Resepti> haetut) {
          if (haetut.size()>0) {
             reseptiA.setText(haetut.get(tulokset.getSelectedIndex()).toString());
+            reseptiA.setCaretPosition(0);
         }
     }
 }

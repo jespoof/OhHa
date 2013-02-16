@@ -15,6 +15,8 @@ import reseptivarasto.domain.Reseptikirjasto;
 /**
  *
  * @author Johanna
+ * 
+ * HakusananKuuntelija näyttää käyttäjän antaman hakusanan hakutulokset listana
  */
 public class HakusananKuuntelija implements ActionListener{
     
@@ -42,24 +44,33 @@ public class HakusananKuuntelija implements ActionListener{
         }
     }
     
+    /**
+    * Hakee nimen perusteella
+    */
     public void haeNimella() {
-        ArrayList<String> hakutuloksetS = kirjasto.haeNimellaALString(hakusana.getText());
+        ArrayList<String> hakutulokset = kirjasto.haeNimellaALString(hakusana.getText());
         
-        hakuListalle(hakutuloksetS);
+        hakuListalle(hakutulokset);
        
     }
     
+    /**
+    * Hakee ainesosan perusteella
+    */
     public void haeAinesosalla() {
-        ArrayList<String> hakutuloksetS = kirjasto.haeAinesosallaALString(hakusana.getText());
+        ArrayList<String> hakutulokset = kirjasto.haeAinesosallaALString(hakusana.getText());
         
-        hakuListalle(hakutuloksetS);
+        hakuListalle(hakutulokset);
         
     }
     
-    public void hakuListalle(ArrayList<String> hakutuloksetS) {
-        if (hakutuloksetS.size() > 0) {
-            String r[] = new String[hakutuloksetS.size()];
-            r = hakutuloksetS.toArray(r);
+    /**
+    * Laittaa hakutulokset näkyviin listalle
+    */
+    public void hakuListalle(ArrayList<String> hakutulokset) {
+        if (hakutulokset.size() > 0) {
+            String r[] = new String[hakutulokset.size()];
+            r = hakutulokset.toArray(r);
             hakutulos.setListData(r);
         }
     } 

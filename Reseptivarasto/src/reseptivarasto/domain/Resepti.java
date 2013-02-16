@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  *
  * @author Johanna
+ * 
  * Resepti-luokassa on reseptin nimi, ainekset ja ohjeet. Ainekset voi myös
  * listata täältä.
  */
@@ -92,8 +93,22 @@ public class Resepti implements Comparable<Resepti>{
     /**
     * Ainesten tiedostoon kirjoittamista varten
     */
-    public String tiedostoon() {
+    public String aineksetTiedostoon() {
         return ainekset.tiedostoon();
+    }
+    
+    /**
+    * Ohjeiden tiedostoon kirjoittamista varten, merkitsee rivit
+    */ 
+    public String ohjeetTiedostoon() {
+        String [] ohjerivit = ohjeet.split("\n");
+        String tiedostoon = "";
+        
+        for (String rivi : ohjerivit) {
+            tiedostoon += rivi + ":&n:";
+        }
+        
+        return tiedostoon;
     }
     
     /**

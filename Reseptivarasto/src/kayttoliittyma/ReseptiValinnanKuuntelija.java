@@ -18,16 +18,16 @@ import reseptivarasto.domain.Reseptikirjasto;
 /**
  *
  * @author Johanna
- * ReseptiValinnanKuuntelija mahdollistaa valitun reseptin tietojen näyttämisen Muokkaa reseptiä -kohdassa.
+ * ReseptiValinnanKuuntelija mahdollistaa valitun reseptin tietojen näyttämisen 
+ * Muokkaa reseptiä -kohdassa.
  */
 public class ReseptiValinnanKuuntelija implements ActionListener{
     private JComboBox laji;
     private JTextField nimi;
-    private GraafinenKayttoliittyma GUI;
     private ArrayList<Ainesosa> ainesosat;
+    private ArrayList<Ainesosa> alunAinesosat;
     private JList aineslista;
     private JTextArea ohjeet;
-    private ArrayList<Ainesosa> ainesosat1;
     private Reseptikirjasto kirjasto;
     
     public ReseptiValinnanKuuntelija(JComboBox laji, JTextField nimi, ArrayList<Ainesosa> ainesosat, JList aineslista, JTextArea ohjeet, Reseptikirjasto kirjasto) {
@@ -37,43 +37,63 @@ public class ReseptiValinnanKuuntelija implements ActionListener{
         this.aineslista = aineslista;
         this.ohjeet = ohjeet;
         this.kirjasto = kirjasto;
-        ainesosat1 = new ArrayList<Ainesosa>();
+        alunAinesosat = new ArrayList<Ainesosa>();
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
         JComboBox cb = (JComboBox)ae.getSource();
         int reseptiNumero = cb.getSelectedIndex()-1;
         
         if (reseptiNumero > -1) {
-            Resepti resepti = kirjasto.getResepti(laji.getSelectedIndex()-1, reseptiNumero);
-            nimi.setText(resepti.getNimi());
-            ainesosat1  = resepti.getAineksetLista();
-            ainesosat.clear();
-        
-            for (Ainesosa osa : ainesosat1) {
-                ainesosat.add(osa);
-            }
-        
-            ainesosatStringille();
-            ohjeet.setText(resepti.getOhjeet());
+            naytaResepti(reseptiNumero);
         } else {
             tyhjennys();
         }
     }
+    
+    /**
+    * Näyttää reseptin tiedot kentissä
+    */
+    public void naytaResepti(int reseptiNumero) {
+        Resepti resepti = kirjasto.getResepti(laji.getSelectedIndex()-1, reseptiNumero);
+        nimi.setText(resepti.getNimi());
+        siirraAinesosatUuteenArrayListiin(resepti);
+        ainesosatStringille();
+        ohjeet.setText(resepti.getOhjeet());
+    }
+    
+    /**
+    * Siirtää reseptiin tallennetut Ainesosat toiseen ArrayListiin muokkaamista
+    * varten
+    */
+    public void siirraAinesosatUuteenArrayListiin(Resepti resepti) {
+        alunAinesosat  = resepti.getAineksetLista();
+        ainesosat.clear();
         
+        for (Ainesosa osa : alunAinesosat) {
+            ainesosat.add(osa);
+        }
+    }
+    
+    /**
+    * Laittaa Reseptiin tallennettujen Ainesosien toString-muodot ArrayListille ja käyttäjän näkyville
+    */
     public void ainesosatStringille() {
-        ArrayList<String> osat = new ArrayList<String>();
+        ArrayList<String> osatToString = new ArrayList<String>();
             
-        for (Ainesosa osa : ainesosat1) {
-            osat.add(osa.toString());
+        for (Ainesosa osa : alunAinesosat) {
+            osatToString.add(osa.toString());
         }
                    
-        String [] lista = new String[osat.size()];
-        lista = osat.toArray(lista);
+        String [] lista = new String[osatToString.size()];
+        lista = osatToString.toArray(lista);
         aineslista.setListData(lista);
     }
     
+    /**
+    * Tyhjentää kentät
+    */
     public void tyhjennys() {
         nimi.setText("");
         ainesosat.clear();
