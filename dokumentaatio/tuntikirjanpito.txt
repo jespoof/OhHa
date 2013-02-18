@@ -24,3 +24,4 @@ päivä	aika	kohde
 14.2 	0,5 h 	Pientä korjailua
 15.2	4 h	Ilmoittimen korjaaminen, ohjeiden rivityksen korjaaminen, haun ulkokö ym.
 16.2	2 h	JavaDocia käyttöliittymälle
+18.2	2,5 h	JavaDocia, testauksen parantelua
