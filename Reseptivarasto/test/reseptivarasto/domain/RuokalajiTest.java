@@ -24,6 +24,11 @@ public class RuokalajiTest {
     Resepti resepti2;
     Ainekset ainekset1;
     Ainekset ainekset2;
+    Ainesosa osa1;
+    Ainesosa osa2;
+    Ainesosa osa3;
+    Ainesosa osa4;
+    
     
     public RuokalajiTest() {
         
@@ -33,16 +38,16 @@ public class RuokalajiTest {
     @Before
     public void setUp() {
         
-        Ainesosa osa1 = new Ainesosa("jauho", "5 dl");
-        Ainesosa osa2 = new Ainesosa("sokeri", "2 dl");
+        osa1 = new Ainesosa("jauho", "5 dl");
+        osa2 = new Ainesosa("sokeri", "2 dl");
         
         ainekset1 = new Ainekset();
         
         ainekset1.lisaaAines(osa1);
         ainekset1.lisaaAines(osa2);
         
-        Ainesosa osa3 = new Ainesosa("vesi", "5 dl");
-        Ainesosa osa4 = new Ainesosa("suola", "1 rkl");
+        osa3 = new Ainesosa("vesi", "5 dl");
+        osa4 = new Ainesosa("suola", "1 rkl");
         
         ainekset2 = new Ainekset();
         
@@ -59,13 +64,32 @@ public class RuokalajiTest {
     }
     
     @Test
-    public void lisaaReseptiToimiiJaAakkosjarjestaa() {
+    public void lisaaReseptiToimiiJaToStringAakkosjarjestaa() {
+        Ainekset ainekset3 = new Ainekset();
+        ainekset3.lisaaAines(osa1);
+        ainekset3.lisaaAines(osa3);
+        Resepti resepti3 = new Resepti("Jauhovesi", ainekset3, "Sekoita");
+        
+        ruokalaji.lisaaResepti(resepti3);
+        
+        String ruokalajinReseptit = ruokalaji.toString();
+        
+        assertEquals("1 Jauhosokeri\n2 Jauhovesi\n3 Suolavesi\n", ruokalajinReseptit);
+    
+    }
+    
+    @Test
+    public void lisaaReseptiEiToimiIlmanAinesosia() {
+        
+        Ainekset tyhjatAinekset = new Ainekset();
+        Resepti tyhja = new Resepti("Tyhja", tyhjatAinekset, "Ei ilman ainesosia voi kokata!");
+        ruokalaji.lisaaResepti(tyhja);
         
         String ruokalajinReseptit = ruokalaji.toString();
         
         assertEquals("1 Jauhosokeri\n2 Suolavesi\n", ruokalajinReseptit);
     
-   }
+    }
     
     @Test
     public void getReseptitToimiiJaAakkosjarjestaa() {

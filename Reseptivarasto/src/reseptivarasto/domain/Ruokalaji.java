@@ -51,8 +51,15 @@ public class Ruokalaji {
         return reseptit.get(luku);
     }
     
+    /**
+    * Lisätään Resepti
+    * 
+    * @param resepti Lisättävä Resepti
+    */
     public void lisaaResepti (Resepti resepti) {
-        reseptit.add(resepti);
+        if (!resepti.getAineksetLista().isEmpty()) {
+            reseptit.add(resepti);
+        }
     }
     
     /**
