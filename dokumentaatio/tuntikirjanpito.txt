@@ -26,4 +26,4 @@ päivä	aika	kohde
 16.2	2 h	JavaDocia käyttöliittymälle
 18.2	2,5 h	JavaDocia, testauksen parantelua
 19.2	0,5 h	Ohjelman rakenteen kuvaus
-20.2	1 h	Käyttöohjeiden kirjoittaminen
+20.2	2 h	Käyttöohjeiden kirjoittaminen, testailu
