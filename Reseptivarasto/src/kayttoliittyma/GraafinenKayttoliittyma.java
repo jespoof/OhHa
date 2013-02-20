@@ -514,7 +514,7 @@ public class GraafinenKayttoliittyma implements ActionListener {
         JPanel nimiPaneeli = new JPanel();
         JLabel nimiLabel = new JLabel("Reseptin nimi:");
         nimiTextField = new JTextField();
-        nimiTextField.setPreferredSize(new Dimension(156,20));
+        nimiTextField.setPreferredSize(new Dimension(150,20));
         nimiPaneeli.add(nimiLabel);
         nimiPaneeli.add(nimiTextField);
         return nimiPaneeli;
