@@ -27,3 +27,4 @@ päivä	aika	kohde
 18.2	2,5 h	JavaDocia, testauksen parantelua
 19.2	0,5 h	Ohjelman rakenteen kuvaus
 20.2	2 h	Käyttöohjeiden kirjoittaminen, testailu
+22.2	0,5 h	Laajennusideoita, viimeinen pushaus!
